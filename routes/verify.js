@@ -6,6 +6,7 @@ const User = require("./../model/User"); // Adjust the path based on your projec
 router.post("/", async (req, res) => {
   try {
     const { email, verificationCode } = req.body;
+    console.log(email, verificationCode);
 
     if (!email || !verificationCode) {
       return res

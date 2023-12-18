@@ -17,7 +17,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "www.localhost:3000", "localhost:3000"],
+    origin: [
+      "http://localhost:3000",
+      "www.localhost:3000",
+      "localhost:3000",
+      "http://192.168.144.219:3000",
+    ],
     credentials: true,
     exposedHeaders: ["Set-Cookie"],
   })

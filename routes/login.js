@@ -6,7 +6,6 @@ const User = require("./../model/User"); // Adjust the path based on your projec
 router.post("/", async (req, res) => {
   try {
     const { email, password } = req.body;
-
     if (!email || !password) {
       return res
         .status(400)
@@ -37,6 +36,7 @@ router.post("/", async (req, res) => {
     await user.save({ validateBeforeSave: false });
 
     user.password = undefined;
+
     user.isValide = undefined;
 
     res.cookie("jwt", token, {
@@ -49,7 +49,7 @@ router.post("/", async (req, res) => {
     res.status(200).json({
       status: "success",
       token,
-      user,
+      role: user.role,
     });
   } catch (e) {
     res.status(400).json({ message: e.message });

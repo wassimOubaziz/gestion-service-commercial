@@ -35,7 +35,7 @@ const userSchima = new Schema({
       lowercase: true,
     },
   ],
-  acitve: {
+  active: {
     type: Boolean,
     default: false,
   },
@@ -50,6 +50,9 @@ const userSchima = new Schema({
   isValide: {
     type: Boolean,
     default: false,
+  },
+  validationCodeExpires: {
+    type: Date,
   },
 });
 
