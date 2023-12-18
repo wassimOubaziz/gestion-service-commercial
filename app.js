@@ -9,6 +9,8 @@ const register = require("./routes/register");
 const login = require("./routes/login");
 const client = require("./routes/client");
 const verify = require("./routes/verify");
+const server = require("./routes/server");
+const admin = require("./routes/admin");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,6 +34,8 @@ app.use("/register", register);
 app.use("/login", login);
 app.use("/verify", verify);
 app.use("/client", protect, permition("client"), client);
+app.use("/server", server);
+app.use("/admin", admin);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

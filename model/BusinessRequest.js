@@ -46,6 +46,10 @@ const businessRequestSchema = new mongoose.Schema({
     type: String,
     default: "in progression",
   },
+  paid: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 businessRequestSchema.index(
