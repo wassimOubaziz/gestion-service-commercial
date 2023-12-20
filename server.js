@@ -1,11 +1,21 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
-const http = require("http");
-const socketIO = require("socket.io");
-
 const app = require("./app");
-const server = http.createServer(app);
-const io = socketIO(server);
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
+
+io.on("connection", (client) => {
+  console.log(`Client connected: ${client.id}`);
+
+  client.on("new_message", (chat) => {
+    console.log(`New message received: ${JSON.stringify(chat)}`);
+    io.emit("broadcast", chat);
+  });
+
+  client.on("disconnect", () => {
+    console.log(`Client disconnected: ${client.id}`);
+  });
+});
 
 const URL = process.env.URL;
 
@@ -16,9 +26,14 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("connected to mongo");
+    console.log("Connected to MongoDB");
+  })
+  .catch((error) => {
+    console.error("Error connecting to MongoDB:", error);
   });
 
 const PORT = process.env.PORT || "3600";
 
-app.listen(PORT, "0.0.0.0", () => console.log("http://localhost:" + PORT));
+server.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server listening on http://localhost:${PORT}`);
+});
