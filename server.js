@@ -1,22 +1,17 @@
+// app.js or index.js
+
 require("dotenv").config();
+const express = require("express");
+const http = require("http");
 const mongoose = require("mongoose");
+const initializeSocket = require("./socket");
+
 const app = require("./app");
-const server = require("http").createServer(app);
-const io = require("socket.io")(server);
+const server = http.createServer(app);
 
-io.on("connection", (client) => {
-  console.log(`Client connected: ${client.id}`);
+// Add your middleware and route configurations here
 
-  client.on("new_message", (chat) => {
-    console.log(`New message received: ${JSON.stringify(chat)}`);
-    io.emit("broadcast", chat);
-  });
-
-  client.on("disconnect", () => {
-    console.log(`Client disconnected: ${client.id}`);
-  });
-});
-
+// Connect to MongoDB
 const URL = process.env.URL;
 
 mongoose.set("strictQuery", true);
@@ -28,12 +23,16 @@ mongoose
   .then(() => {
     console.log("Connected to MongoDB");
   })
+  .then(() => {
+    const PORT = process.env.PORT || "3600";
+
+    // Pass the server instance to initializeSocket
+    const io = initializeSocket(server);
+
+    server.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server listening on http://localhost:${PORT}`);
+    });
+  })
   .catch((error) => {
     console.error("Error connecting to MongoDB:", error);
   });
-
-const PORT = process.env.PORT || "3600";
-
-server.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
-});
