@@ -1,36 +1,60 @@
 const socketIO = require("socket.io");
 const Message = require("./model/Message");
 const User = require("./model/User");
+const jwt = require("jsonwebtoken");
 
 async function initializeSocket(server) {
   const io = socketIO(server);
+
+  io.use((socket, next) => {
+    const token = socket.handshake.query.token;
+
+    // Validate and decode the token
+    jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+      if (err) {
+        return next(new Error("Authentication error"));
+      }
+      const user = await User.findById(decoded.id);
+      // Attach user details to the socket
+      socket.decoded = user;
+      next();
+    });
+  });
 
   io.on("connection", (socket) => {
     console.log(`Client connected: ${socket.id}`);
 
     socket.on("new_message", async (data) => {
       data = JSON.parse(data);
-      console.log(data);
 
       // Save the message to the database
       const message = new Message({
-        userId: data.userId,
+        userId: socket.decoded._id.toString(),
         isSelf: data.isSelf,
-        roomId: data.roomId,
+        roomId: socket.decoded._id.toString(),
         message: data.message,
       });
 
       await message.save();
 
       // Emit the message to the room
-      io.to(data.roomId).emit("broadcast", data);
+      io.to(socket.decoded._id.toString()).emit("broadcast", {
+        userId: socket.decoded._id.toString(),
+        isSelf: data.isSelf,
+        roomId: socket.decoded._id.toString(),
+        message: data.message,
+      });
     });
 
-    socket.on("join_room", async (roomId) => {
+    socket.on("join_room", async () => {
+      // Modify this logic based on your requirements
+      const roomId = socket.decoded._id.toString();
+
       if (!roomId || typeof roomId !== "string" || roomId.trim() === "") {
         // Handle invalid roomId
         console.error(`Invalid roomId provided by client ${socket.id}`);
-        // You can emit an error message or take appropriate action
+        // Emit an error event or take appropriate action
+        socket.emit("join_room_error", "Invalid room ID");
         return;
       }
 
@@ -43,10 +67,10 @@ async function initializeSocket(server) {
       if (existingMessages.length === 0) {
         // Create an empty message for the room
         const emptyMessage = new Message({
-          userId: roomId, // You can use a system user for empty messages
+          userId: roomId,
           roomId: roomId,
           isSelf: false,
-          message: "Room created",
+          message: "Welcome to the Support Hub! 🚀",
         });
 
         await emptyMessage.save();
