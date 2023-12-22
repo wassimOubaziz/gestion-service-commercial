@@ -46,9 +46,11 @@ async function initializeSocket(server) {
       });
     });
 
-    socket.on("join_room", async () => {
+    socket.on("join_room", async (roomId) => {
       // Modify this logic based on your requirements
-      const roomId = socket.decoded._id.toString();
+      if (!roomId) {
+        roomId = socket.decoded._id.toString();
+      }
 
       if (!roomId || typeof roomId !== "string" || roomId.trim() === "") {
         // Handle invalid roomId
