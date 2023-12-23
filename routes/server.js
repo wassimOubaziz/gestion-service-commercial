@@ -2,6 +2,7 @@ const router = require("express").Router();
 const User = require("./../model/User");
 const BusinessRequest = require("./../model/BusinessRequest");
 const Message = require("./../model/Message");
+const moment = require("moment");
 
 // GET all business requests
 router.get("/posts", async (req, res) => {
@@ -89,9 +90,17 @@ router.get("/messages", async (req, res) => {
           userId: "$lastMessage.userId",
           last_name: "$client.last_name",
           email: "$client.email",
+          timeElapsed: {
+            $subtract: [new Date(), "$lastMessage.timestamp"],
+          },
         },
       },
     ]);
+
+    // Format the timeElapsed using moment.js
+    lastMessages.forEach((msg) => {
+      msg.timeElapsed = moment.duration(msg.timeElapsed).humanize();
+    });
 
     res.json(lastMessages);
   } catch (error) {
