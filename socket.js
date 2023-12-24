@@ -26,30 +26,41 @@ async function initializeSocket(server) {
 
     socket.on("new_message", async (data) => {
       data = JSON.parse(data);
-
+      console.log(data);
+      if (!data.roomId) {
+        roomId = socket.decoded._id.toString();
+      } else {
+        roomId = data.roomId;
+        data.isSelf = false;
+      }
       // Save the message to the database
       const message = new Message({
         userId: socket.decoded._id.toString(),
         isSelf: data.isSelf,
-        roomId: socket.decoded._id.toString(),
+        roomId: roomId,
         message: data.message,
       });
 
       await message.save();
 
+      const user = await User.findById(socket.decoded._id.toString());
+
       // Emit the message to the room
-      io.to(socket.decoded._id.toString()).emit("broadcast", {
-        userId: socket.decoded._id.toString(),
+      io.to(roomId).emit("broadcast", {
+        userId: user.last_name,
         isSelf: data.isSelf,
-        roomId: socket.decoded._id.toString(),
+        roomId: roomId,
         message: data.message,
       });
     });
 
-    socket.on("join_room", async (roomId) => {
+    socket.on("join_room", async (roomIdc) => {
       // Modify this logic based on your requirements
-      if (!roomId) {
+      let roomId = "";
+      if (!roomIdc) {
         roomId = socket.decoded._id.toString();
+      } else {
+        roomId = roomIdc;
       }
 
       if (!roomId || typeof roomId !== "string" || roomId.trim() === "") {
@@ -69,7 +80,7 @@ async function initializeSocket(server) {
       if (existingMessages.length === 0) {
         // Create an empty message for the room
         const emptyMessage = new Message({
-          userId: roomId,
+          userId: "6582c8e3b652a65d70655d20",
           roomId: roomId,
           isSelf: false,
           message: "Welcome to the Support Hub! 🚀",
@@ -85,7 +96,7 @@ async function initializeSocket(server) {
           const user = await User.findById(message.userId).exec();
           return {
             userId: user.last_name, // Replace last_name with the actual user property you want to send
-            roomId: message.roomId,
+            roomId: roomId,
             isSelf: message.isSelf,
             message: message.message, // Use message.text to get the message content
           };

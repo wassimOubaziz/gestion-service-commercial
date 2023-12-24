@@ -64,45 +64,34 @@ router.put("/posts/:id", async (req, res) => {
 // Define the route to get the last message for each client
 router.get("/messages", async (req, res) => {
   try {
-    // Aggregate to get the last message for each client
+    // Aggregate to get the last message for each room
     const lastMessages = await Message.aggregate([
       {
         $group: {
-          _id: "$userId",
+          _id: "$roomId",
           lastMessage: { $last: "$$ROOT" },
-        },
-      },
-      {
-        $lookup: {
-          from: "users", // Use the name of the users collection
-          localField: "_id",
-          foreignField: "_id",
-          as: "client",
-        },
-      },
-      {
-        $unwind: "$client",
-      },
-      {
-        $project: {
-          message: "$lastMessage.message",
-          timestamp: "$lastMessage.timestamp",
-          userId: "$lastMessage.userId",
-          last_name: "$client.last_name",
-          email: "$client.email",
-          timeElapsed: {
-            $subtract: [new Date(), "$lastMessage.timestamp"],
-          },
         },
       },
     ]);
 
-    // Format the timeElapsed using moment.js
-    lastMessages.forEach((msg) => {
-      msg.timeElapsed = moment.duration(msg.timeElapsed).humanize();
+    // Fetch user details for each roomId
+    const userDetailsPromises = lastMessages.map(async (msg) => {
+      const user = await User.findById(msg._id);
+      return {
+        message: msg.lastMessage.message,
+        userId: msg.lastMessage.roomId,
+        last_name: user ? user.last_name : null,
+        email: user ? user.email : null,
+        timeElapsed: moment
+          .duration(new Date() - msg.lastMessage.timestamp)
+          .humanize(),
+      };
     });
 
-    res.json(lastMessages);
+    // Wait for all user details promises to resolve
+    const userDetails = await Promise.all(userDetailsPromises);
+
+    res.json(userDetails);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
