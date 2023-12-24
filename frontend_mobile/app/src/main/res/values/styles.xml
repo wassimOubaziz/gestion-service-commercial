@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    Login page-->
+    <style name="hello_login">
+        <item name="android:textSize">30sp</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textColor">#1E232C</item>
+        <item name="android:lineHeight">80sp</item>
+        <item name="android:fontFamily">@font/urbanistbold</item>
+    </style>
+
+    <style name="btn_text">
+        <item name="android:textSize">24sp</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:lineHeight">80sp</item>
+        <item name="android:fontFamily">@font/urbanistbold</item>
+    </style>
+
+    <style name="forgot_pass">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#6A707C</item>
+        <item name="android:fontFamily">@font/urbanistbold</item>
+    </style>
+
+    <style name="or_login_wi">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#6A707C</item>
+        <item name="android:fontFamily">@font/urbanist</item>
+    </style>
+
+    <style name="don_t_have_">
+        <item name="android:textSize">15sp</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:textColor">#24282C</item>
+    </style>
+
+    <style name="registre">
+        <item name="android:textSize">15sp</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:textColor">#35C2C1</item>
+    </style>
+
+    <style name="small_text">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#8391A1</item>
+        <item name="android:fontFamily">@font/urbanist</item>
+
+    </style>
+
+    <style name="OTPDigitEditText">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:inputType">number</item>
+        <item name="android:maxLength">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:backgroundTint">@color/secondary</item>
+        <item name="android:paddingStart">4dp</item>
+        <item name="android:paddingEnd">4dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+    </style>
+
+    <style name="hello_home">
+        <item name="android:textSize">30sp</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textColor">#1E232C</item>
+        <item name="android:fontFamily">@font/urbanistbold</item>
+    </style>
+
+    <style name="ActionButtonStyle" parent="Widget.AppCompat.ImageButton">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">#00FFFFFF</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+
+
+    <style name="TableHeaderStyle">
+        <item name="android:background">#1E232C</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="DataRowsHeaderStyle">
+        <!-- Customize text color, alignment, etc., as needed -->
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!-- Style for Data Rows -->
+    <style name="DataRowsStyle">
+        <!-- Customize text color, alignment, etc., as needed -->
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:layout_weight">1</item>
+        <!-- Add background color for alternating rows -->
+        <item name="android:background">#F2F2F2</item>
+        <!-- Add borders to cells -->
+        <item name="android:layout_margin">1dp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <!-- strings.xml -->
+
+
+</resources>

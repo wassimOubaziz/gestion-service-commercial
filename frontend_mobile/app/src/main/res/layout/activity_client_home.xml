@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".users.ClientHomeActivity">
+
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:menu="@menu/main_menu" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp">
+
+            <include
+                android:id="@+id/action_btns"
+                layout="@layout/action_btns"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/welcome_homeclient"
+                android:textAppearance="@style/hello_home"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/action_btns" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                style="@style/ActionButtonStyle"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="ChangeToMessagery"
+                android:src="@drawable/messageicon"
+                app:layout_constraintBottom_toTopOf="@+id/submit_request_btn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/action_btns"
+                app:layout_constraintVertical_bias="0.0" />
+            <RelativeLayout
+                android:id="@+id/submit_request_btn"
+
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/client_home_btn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+                <!-- Text on the left -->
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="@string/submit_request_btn"
+                    android:textAppearance="@style/btn_text" />
+
+                <!-- Image on the right -->
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="16dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/submit_request_white" />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:contentDescription="submit request"
+                    android:focusable="true"
+                    android:onClick="goToSubmitForm" />
+
+                <!-- Button overlay to capture clicks -->
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/follow_request_btn"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/client_home_btn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/submit_request_btn">
+
+                <!-- Text on the left -->
+                <TextView
+                    android:id="@+id/follow_request_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="@string/follow_request_btn"
+                    android:textAppearance="@style/btn_text" />
+
+                <!-- Image on the right -->
+                <ImageView
+                    android:id="@+id/follow_request"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="16dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/follow_request_white" />
+
+                <Button
+                    android:id="@+id/button50"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:contentDescription="follow request"
+                    android:focusable="true"
+                    android:onClick="goToRequestProcess" />
+
+                <!-- Button overlay to capture clicks -->
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/ressource_btn"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/client_home_btn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/follow_request_btn">
+
+                <!-- Text on the left -->
+                <TextView
+                    android:id="@+id/ressource_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="@string/ressource_btn"
+                    android:textAppearance="@style/btn_text" />
+
+                <!-- Image on the right -->
+                <ImageView
+                    android:id="@+id/ressource_img"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="16dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ressource_white" />
+
+                <Button
+                    android:id="@+id/button53"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:contentDescription="follow request"
+                    android:focusable="true"
+                    android:onClick="goToRessources" />
+
+                <!-- Button overlay to capture clicks -->
+            </RelativeLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

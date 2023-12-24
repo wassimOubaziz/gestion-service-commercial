@@ -1,0 +1,36 @@
+<!-- res/layout/action_buttons.xml -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:id="@+id/menu_btn"
+        style="@style/ActionButtonStyle"
+        android:layout_marginTop="16dp"
+        android:contentDescription="menu"
+        android:src="@drawable/menu_black"
+        app:layout_constraintEnd_toStartOf="@+id/notif_btn"
+        app:layout_constraintHorizontal_bias="0.004"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/notif_btn"
+        style="@style/ActionButtonStyle"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="notification"
+        android:src="@drawable/notification_black"
+        app:layout_constraintEnd_toStartOf="@+id/user_btn"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/user_btn"
+        style="@style/ActionButtonStyle"
+        android:contentDescription="user"
+        android:src="@drawable/user_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

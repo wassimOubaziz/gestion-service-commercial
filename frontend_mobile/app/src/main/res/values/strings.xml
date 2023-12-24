@@ -1,0 +1,127 @@
+<resources>
+    <string name="app_name">Sijili</string>
+
+    <!-- Main activity-->
+    <string name="login_button">Login</string>
+    <string name="sign_up_button">Sign Up</string>
+    <string name="desc">Your Effortless Commercial Registeration Solution</string>
+    <!-- Login activity-->
+    <string name="hello_login">
+        Hello! Login to get started
+    </string>
+    <string name="email_login">
+        Enter your email
+    </string>
+    <string name="password_login">
+        Enter your password
+    </string>
+    <string name="forgot_pass">
+        Forgot Password?
+    </string>
+    <string name="login_btn">
+        Login
+    </string>
+    <string name="or_login_wi">
+        Or Login with
+    </string>
+    <string name="google_sign_in_button">google</string>
+    <!-- strings.xml -->
+    <string name="don_t_have_">
+        Don\'t have an account?
+    </string>
+    <string name="registre">
+        Register Now
+    </string>
+
+    <!-- SignUp activity-->
+
+    <string name="hello_regis">
+        Hello! Register to get started
+    </string>
+    <string name="email_regis">
+        Enter your email
+    </string>
+    <string name="firstname_regis">Your firstname</string>
+    <string name="lastname_regis">Your lastname</string>
+    <string name="password_regis">Enter your password</string>
+    <string name="password_confirm_regis">Confirm your password</string>
+    <string name="registre_btn">Registre</string>
+    <string name="or_regis_wi">Or register with</string>
+    <string name="have_">Already have an account?</string>
+    <string name="login_">Login here</string>
+
+    <!-- Password forgeted activity-->
+    <string name="forgot_pass_text">Forgot Password?</string>
+    <string name="forgot_desc">Don\'t worry! It occurs. Please enter the email address linked with your account.</string>
+    <string name="send_code_btn">Send Code</string>
+    <string name="remebered_">Password Remembered?</string>
+
+    <!-- otp verification activity-->
+    <string name="otp_ver_text">OTP Verification</string>
+    <string name="otp_desc">Enter the verification code we just sent on your email address.</string>
+    <string name="verify_btn">Verify</string>
+
+    <!-- create new pass page-->
+    <string name="create_new_pass_text">Create new password</string>
+    <string name="create_new_pass_desc">Your new password must be unique from those previously used.</string>
+    <string name="new_pass_text">New password</string>
+    <string name="new_pass_confirm">Confirm password</string>
+    <string name="reseat_pass_btn">Reseat password</string>
+
+    <!-- Password changed succeffully-->
+    <string name="pass_changed">Password Changed!</string>
+    <string name="pass_changed_desc">Your password has been changed successfully.</string>
+    <string name="back_login_text">Back to login</string>
+
+    <!-- **************************************************************** -->
+    <!-- ****************************Client*****************************  -->
+    <!-- **************************************************************** -->
+    <!-- Client home activity-->
+    <string name="welcome_homeclient">Welcome Home User User</string>
+    <string name="submit_request_btn">Submit a request</string>
+    <string name="follow_request_btn">Follow a request</string>
+    <string name="ressource_btn">Resources</string>
+
+    <!-- Client home sub activity-->
+    <string name="fill_Infos">Please, Fill your personal information so that we can handle your submit.</string>
+    <string name="sub_form_text">Submit Form</string>
+    <string name="company_sub">Company name</string>
+    <string name="address_sub">Address</string>
+    <string name="phone_sub">
+        Phone number
+    </string>
+    <string name="activity_type_sub">Activity type</string>
+    <string name="Date_sub">Date of birth</string>
+    <string name="nationality_sub">Nationality</string>
+    <string name="nat_id_sub">National ID</string>
+    <string name="verify_txt">I will agree to</string>
+    <string name="term_condition_txt">Terms and Conditions</string>
+    <!-- Client home follow activity-->
+    <string name="flw_text">Request processed result</string>
+    <string name="flw_desc_">Here you can see the result of your commercial register request.\n\nClick on each request to see more details.</string>
+    <string name="terms_and_conditions_text_">Terms and Conditions:\n\nWelcome to our application for business registration. By using this application, you agree to comply with and be bound by the following terms and conditions. Please read these terms carefully before using the application.\n\nAcceptance of Terms:\nBy using the application, you agree to be bound by these terms, which establish a contractual relationship between you and the application.\n\nUser Responsibilities:\nUsers are responsible for providing accurate and complete information in the business registration application. Any false information may lead to the rejection of the application.\n\nPrivacy Policy:\nThe application respects and protects the privacy of its users. Personal information provided during the registration process will be handled in accordance with our Privacy Policy.\n\nApplication Usage:\nThe application is designed to assist users in the process of submitting and tracking business registration requests. Any misuse or unauthorized access to the application is strictly prohibited.\n\nNotification Preferences:\nUsers agree to receive notifications regarding the status of their registration requests. These notifications will be sent to the provided email address and mobile number.\n\nSupport and Assistance:\nUsers can contact customer support for assistance. The support team will provide help and guidance related to the application and registration process.\n\nIntellectual Property:\nThe application and its content are protected by intellectual property laws. Users agree not to reproduce, distribute, modify, or create derivative works based on the application without explicit permission.\n\nTermination:\nThe application reserves the right to terminate or suspend user accounts for any violation of these terms and conditions.\n\nUpdates and Changes:\nThe application may update or change these terms and conditions from time to time. Users will be notified of any significant changes.\n\nGoverning Law:\nThese terms and conditions are governed by the laws of [insert applicable jurisdiction].\n\nBy using the application, you acknowledge that you have read, understood, and agree to be bound by these terms and conditions.</string>
+    <!-- Client home follow infos activity -->
+    <string name="follow_request_infos">Request infos</string>
+    <string name="pay_button">Pay here</string>
+    <string name="delete_rq_">Delete</string>
+    <string name="print_rq_">Print</string>
+
+    <!-- Client home resources activity-->
+    <string name="ressources_text_">Introduction:\nThis guide provides an overview of the key features of the business registration application. Please follow these steps to navigate through the application effectively.\n\n1. Submission of Request:\n\nUsers fill in required information for business registration.\nThe application guides users through the data entry process, ensuring accurate completion of mandatory fields.\n2. Real-Time Tracking:\n\nAfter submission, users can track the status of their request in real time.\nA clear and intuitive dashboard displays various stages of the process, with notifications updating users on request progress.\n3. Assistance and Resources:\n\nAccess built-in assistance features, including FAQs, form-filling tips, and resources on business registration requirements.\n4. Customer Support:\n\nUsers can directly contact customer support for personalized assistance via in-app messaging or calls.\nApplication Execution Example:\n\nDownload and install the app.\nLog in or create an account.\nChoose from options like \"Submit Request,\" \"Track Request,\" \"Resources,\" and \"Customer Support.\"\nFollow prompts to submit a new business registration request.\nReview and confirm submission.\nReceive confirmation and a unique tracking number.\nTrack progress and receive important notifications.\nContact customer support if needed.\nUpon approval, receive a notification that the business registration is ready for retrieval.</string>
+    <string name="resources_text_">Introduction:\nThis guide provides an overview of the key features of the business registration application. Please follow these steps to navigate through the application effectively.\n\n1. Submission of Request:\n\nUsers fill in required information for business registration.\nThe application guides users through the data entry process, ensuring accurate completion of mandatory fields.\n2. Real-Time Tracking:\n\nAfter submission, users can track the status of their request in real time.\nA clear and intuitive dashboard displays various stages of the process, with notifications updating users on request progress.\n3. Assistance and Resources:\n\nAccess built-in assistance features, including FAQs, form-filling tips, and resources on business registration requirements.\n4. Customer Support:\n\nUsers can directly contact customer support for personalized assistance via in-app messaging or calls.\nApplication Execution Example:\n\nDownload and install the app.\nLog in or create an account.\nChoose from options like \"Submit Request,\" \"Track Request,\" \"Resources,\" and \"Customer Support.\"\nFollow prompts to submit a new business registration request.\nReview and confirm submission.\nReceive confirmation and a unique tracking number.\nTrack progress and receive important notifications.\nContact customer support if needed.\nUpon approval, receive a notification that the business registration is ready for retrieval.</string>
+
+
+    <!-- **************************************************************** -->
+    <!-- ****************************Server*****************************  -->
+    <!-- **************************************************************** -->
+    <!-- Serveur home activity-->
+    <string name="welcome_homeserver">Welcome Home Server Server</string>
+    <string name="manage_request_btn">Manage requests</string>
+    <string name="manage_messages_btn">Messages</string>
+    <string name="request_list_txt">List of requests</string>
+    <string name="submit_button">Submit</string>
+    <string name="messages_list_txt">List of messages</string>
+
+
+</resources>
+
