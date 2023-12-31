@@ -3,12 +3,16 @@ const User = require("./../model/User");
 const BusinessRequest = require("./../model/BusinessRequest");
 const Message = require("./../model/Message");
 const moment = require("moment");
+const FCM = require("fcm-node");
+
+// Initialize FCM with your server key
+const fcm = new FCM(process.env.MY_FCM_SERVER_KEY);
 
 // GET all business requests
 router.get("/posts", async (req, res) => {
   try {
-    // Find all business requests
-    const allRequests = await BusinessRequest.find();
+    // Find all business requests that are only in progress
+    const allRequests = await BusinessRequest.find({ status: "in progress" });
 
     if (!allRequests || allRequests.length === 0) {
       return res.status(404).json({ message: "No business requests found" });
@@ -43,10 +47,52 @@ router.put("/posts/:id", async (req, res) => {
   try {
     const postId = req.params.id;
 
-    // Find the post by its ID and update the status
     const updatedPost = await BusinessRequest.findByIdAndUpdate(
       postId,
       { status: "completed" },
+      { new: true }
+    );
+
+    if (!updatedPost) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    const clientUser = await User.findById(updatedPost.userId);
+
+    if (!clientUser) {
+      return res.status(404).json({ message: "Client user not found" });
+    }
+
+    const message = {
+      to: clientUser.deviceToken,
+      notification: {
+        title: "Business Request Completed",
+        body: "Your business request has been completed. You can download the PDF now.",
+      },
+    };
+
+    fcm.send(message, function (err, response) {
+      if (err) {
+        console.log("Error sending notification:", err);
+      } else {
+        console.log("Notification sent successfully:", response);
+      }
+    });
+
+    res.status(200).json(updatedPost);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.put("/posts/:id/refuse", async (req, res) => {
+  try {
+    const postId = req.params.id;
+
+    // Find the post by its ID and update the status
+    const updatedPost = await BusinessRequest.findByIdAndUpdate(
+      postId,
+      { status: "refuse" },
       { new: true }
     );
 

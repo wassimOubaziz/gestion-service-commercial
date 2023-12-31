@@ -54,6 +54,7 @@ const userSchima = new Schema({
   validationCodeExpires: {
     type: Date,
   },
+  deviceToken: { type: String },
 });
 
 //this will work when i update the password or when i create new user

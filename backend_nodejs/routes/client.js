@@ -132,10 +132,12 @@ router.put("/:id/validate-payment", async (req, res) => {
 router.get("/:id/register-pdf", async (req, res) => {
   const id = req.params.id;
 
-  const post = await BusinessRequest.findOne({ id });
+  const post = await BusinessRequest.findById(id);
+
+  console.log(post.userId.toString(), req.user._id.toString());
 
   // Check if the authenticated user is the owner of the business request
-  if (post.userId.toString() !== req.user._id) {
+  if (post.userId.toString() !== req.user._id.toString()) {
     return res.status(403).json({
       message: "Unauthorized: You don't have permission to get this pdf",
     });
@@ -164,9 +166,12 @@ router.get("/:id/register-pdf", async (req, res) => {
     "ID verification": post._id,
   };
 
+  // Generate a unique filename for the PDF
+  const filename = `business_request_${post._id}.pdf`;
+
   // Set response headers for PDF download
   res.setHeader("Content-Type", "application/pdf");
-  res.setHeader("Content-Disposition", "attachment; filename=custom.pdf");
+  res.setHeader("Content-Disposition", `attachment; filename=${filename}`);
 
   // Pipe the PDF content to the response
   doc.pipe(res);

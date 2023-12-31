@@ -11,6 +11,7 @@ const client = require("./routes/client");
 const verify = require("./routes/verify");
 const server = require("./routes/server");
 const admin = require("./routes/admin");
+const forgotPassword = require("./routes/forgetPassword");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -36,6 +37,7 @@ app.use(express.json());
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 app.use("/register", register);
+app.use("/forgot-password", forgotPassword);
 app.use("/login", login);
 app.use("/verify", verify);
 app.use("/client", protect, permition("client"), client);

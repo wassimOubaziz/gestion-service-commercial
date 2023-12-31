@@ -4,13 +4,13 @@ const nodemailer = require("nodemailer");
 const User = require("../model/User");
 
 // Route to initiate the forgot password process
-router.post("/forgot-password", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { email } = req.body;
 
     // Find the user by email
     const user = await User.findOne({ email });
-
+    console.log(user);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -33,13 +33,13 @@ router.post("/forgot-password", async (req, res) => {
     try {
       await transporter.sendMail({
         from: process.env.EMAIL_SECRET,
-        to: body.email,
+        to: email,
         subject: "Please validate your account",
-        text: `Validation code is: ${verificationCode}`,
+        text: `Validation code is: ${validationCode}`,
         html: `<div style="background-color: #f2f2f2; padding: 20px;">
           <h2>Thanks for registering!</h2>
           <p>Please use the following code to validate your account:</p>
-          <p style="font-size: 24px; font-weight: bold;">${verificationCode}</p>
+          <p style="font-size: 24px; font-weight: bold;">${validationCode}</p>
       </div>`,
       });
     } catch (e) {
