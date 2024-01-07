@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,12 +20,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class OTPVerification extends AppCompatActivity {
+public class OTPVerification extends BaseActivity {
     private EditText digit1, digit2, digit3, digit4;
     private RetrofitInterface retrofitInterface;
     String email = "";
+    String emailForPass = "";
+    Intent i;
 
-    private String BASE_URL = "http://192.168.1.41:4000";
+    private String BASE_URL = "http://192.168.140.221:4000";
     private Retrofit retrofit;
 
 
@@ -32,8 +35,9 @@ public class OTPVerification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otpverification);
-        Intent i = getIntent();
+        i = getIntent();
         email = i.getStringExtra("email"); // Replace with the actual email
+        emailForPass = i.getStringExtra("emailForPass");
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -63,7 +67,7 @@ public class OTPVerification extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!s.toString().trim().isEmpty()){
+                if (!s.toString().trim().isEmpty()) {
                     digit2.requestFocus();
                 }
             }
@@ -80,7 +84,7 @@ public class OTPVerification extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!s.toString().trim().isEmpty()){
+                if (!s.toString().trim().isEmpty()) {
                     digit3.requestFocus();
                 }
             }
@@ -98,7 +102,7 @@ public class OTPVerification extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!s.toString().trim().isEmpty()){
+                if (!s.toString().trim().isEmpty()) {
                     digit4.requestFocus();
                 }
             }
@@ -109,16 +113,57 @@ public class OTPVerification extends AppCompatActivity {
             }
         });
     }
+
     public void verifyDigits(View view) {
+        String sourceActivity = i.getStringExtra("sourceActivity");
         String otp = digit1.getText().toString() +
                 digit2.getText().toString() +
                 digit3.getText().toString() +
                 digit4.getText().toString();
+
+
+        if ("ForgotPasswordActivity".equals(sourceActivity)){
+            emailForPass = i.getStringExtra("emailForPass");
+            OTPRequest otpRequest = new OTPRequest(emailForPass, otp);
+            showLoadingDialog();
+            Call<Void> call = retrofitInterface.verifyOtp(otpRequest);
+            call.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    dismissLoadingDialog();
+                    Log.d("Response otp","" + response);
+                    if (response.isSuccessful()) {
+                        // Handle successful verification
+                        Toast.makeText(OTPVerification.this, "Verification successful", Toast.LENGTH_SHORT).show();
+                        // Proceed to the next step, e.g., redirect to a new activity
+                        Intent intent = new Intent(OTPVerification.this, CreateNewPassword.class);
+                        intent.putExtra("emailForPass", emailForPass);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        // Handle unsuccessful verification
+                        Toast.makeText(OTPVerification.this, "Verification failed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    dismissLoadingDialog();
+                    // Handle network errors or other failures
+                    Toast.makeText(OTPVerification.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            return;
+
+        }
+        Log.d("TEST2", "test2");
         OTPRequest otpRequest = new OTPRequest(email, otp);
+        showLoadingDialog();
         Call<Void> call = retrofitInterface.verifyOtp(otpRequest);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+                dismissLoadingDialog();
                 if (response.isSuccessful()) {
                     // Handle successful verification
                     Toast.makeText(OTPVerification.this, "Verification successful", Toast.LENGTH_SHORT).show();
@@ -134,6 +179,7 @@ public class OTPVerification extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
+                dismissLoadingDialog();
                 // Handle network errors or other failures
                 Toast.makeText(OTPVerification.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }

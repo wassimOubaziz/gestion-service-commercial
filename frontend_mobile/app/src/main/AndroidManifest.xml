@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,6 +17,12 @@
         android:theme="@style/Theme.Sijili"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".users.serveractivities.ServerRequestInfos"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileInfos"
+            android:exported="false" />
         <activity
             android:name=".messagerie.ChatActivity"
             android:exported="false" />
@@ -76,6 +83,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.sijili.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
     </application>
 
 </manifest>

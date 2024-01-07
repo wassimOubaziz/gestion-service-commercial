@@ -22,18 +22,22 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     private EditText emailEditText, passwordEditText;
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
-    private String BASE_URL = "http://192.168.1.41:4000";
+    private String BASE_URL = "http://192.168.140.221:4000";
     private AlertDialog loginDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        if (isLoggedIn()) {
+            redirectToHomeScreen();
+            return;
+        }
 
         emailEditText = findViewById(R.id.enteredEmail);
         passwordEditText = findViewById(R.id.enteredPassword);
@@ -47,7 +51,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginHandler(View view) {
-        showLoadingScreen();
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
         if (email.isEmpty() || password.isEmpty()) {
@@ -57,14 +60,14 @@ public class LoginActivity extends AppCompatActivity {
 
         // Create a LoginRequest object to send to the server
         LoginRequest loginRequest = new LoginRequest(email, password);
-
+        showLoadingDialog();
         // Call the login API endpoint
         Call<LoginResponse> call = retrofitInterface.executeLogin(loginRequest);
 
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                hideLoadingScreen();
+                dismissLoadingDialog();
                 if (response.isSuccessful()) {
                     LoginResponse loginResponse = response.body();
 
@@ -78,11 +81,19 @@ public class LoginActivity extends AppCompatActivity {
 
                         // Save the role information to SharedPreferences
                         List<String> roles = loginResponse.getRole();
+                        String firstName = loginResponse.getFirst_name();
+                        String lastName = loginResponse.getLast_name();
+                        String name = loginResponse.getFirst_name() + " " + loginResponse.getLast_name();
+                        String email = loginResponse.getEmail();
                         if (roles != null && roles.size() > 0) {
                             editor.putString("role", roles.get(0));
                             editor.putInt("roleSize", roles.size());
-                        }
 
+                        }
+                        editor.putString("name", name);
+                        editor.putString("firstName", firstName);
+                        editor.putString("lastName", lastName);
+                        editor.putString("email", email);
                         editor.apply();
 
                         Toast.makeText(LoginActivity.this, "Login successful. Token: " + token, Toast.LENGTH_SHORT).show();
@@ -100,30 +111,52 @@ public class LoginActivity extends AppCompatActivity {
                         String errorMessage = loginResponse.getMessage();
                         System.out.println("*****asd" + errorMessage);
                         if (errorMessage != null && !errorMessage.isEmpty()) {
-                            Toast.makeText(LoginActivity.this, "Error: " + errorMessage, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Wrong email or password! " + errorMessage, Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(LoginActivity.this, "Login failed1", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Wrong email or password! ", Toast.LENGTH_SHORT).show();
                         }
                     }
                 } else {
                     // Handle unsuccessful login response
-                    hideLoadingScreen();
-                    Toast.makeText(LoginActivity.this, "Login failed2", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Wrong email or password! ", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                hideLoadingScreen();
+                dismissLoadingDialog();
                 // Handle network errors or other failures
-                Toast.makeText(LoginActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "No internet" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
+
         });
+//        dismissLoadingDialog();
     }
 
     public void forgotPassword(View view) {
         Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
         startActivity(intent);
+        finish();
+    }
+
+    private boolean isLoggedIn() {
+        // Check if a valid authentication token is stored in SharedPreferences
+        SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
+        String token = preferences.getString("token", "");
+        return !token.isEmpty();
+    }
+
+    private void redirectToHomeScreen() {
+        // Redirect to the home screen based on the user's role
+        SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
+        String role = preferences.getString("role", "");
+        if (role.equals("client")) {
+            Intent intent = new Intent(LoginActivity.this, ClientHomeActivity.class);
+            startActivity(intent);
+        } else if (role.equals("server")) {
+            Intent intent = new Intent(LoginActivity.this, ServerHomeActivity.class);
+            startActivity(intent);
+        }
         finish();
     }
 
@@ -133,15 +166,4 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
-    private void showLoadingScreen() {
-        Intent intent = new Intent(this, LoadingActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    private void hideLoadingScreen() {
-        // Finish the LoadingActivity to hide the loading screen
-        finishActivity(LoadingActivity.class.hashCode());
-        finish();
-    }
 }

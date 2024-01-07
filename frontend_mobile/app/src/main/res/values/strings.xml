@@ -77,7 +77,7 @@
     <!-- ****************************Client*****************************  -->
     <!-- **************************************************************** -->
     <!-- Client home activity-->
-    <string name="welcome_homeclient">Welcome Home User User</string>
+    <string name="welcome_homeclient">Welcome Home</string>
     <string name="submit_request_btn">Submit a request</string>
     <string name="follow_request_btn">Follow a request</string>
     <string name="ressource_btn">Resources</string>
@@ -94,6 +94,9 @@
     <string name="Date_sub">Date of birth</string>
     <string name="nationality_sub">Nationality</string>
     <string name="nat_id_sub">National ID</string>
+    <string name="nat_id_sub_ex">National ID (XXXXXXXXX)</string>
+    <string name="phone_sub_ex">Phone number (0XXXXXXXXX)</string>
+    <string name="Date_sub_ex">Birthday (DD-MM-YYYY)</string>
     <string name="verify_txt">I will agree to</string>
     <string name="term_condition_txt">Terms and Conditions</string>
     <!-- Client home follow activity-->
@@ -115,13 +118,30 @@
     <!-- ****************************Server*****************************  -->
     <!-- **************************************************************** -->
     <!-- Serveur home activity-->
-    <string name="welcome_homeserver">Welcome Home Server Server</string>
+    <string name="welcome_homeserver">Welcome Home</string>
     <string name="manage_request_btn">Manage requests</string>
     <string name="manage_messages_btn">Messages</string>
     <string name="request_list_txt">List of requests</string>
     <string name="submit_button">Submit</string>
     <string name="messages_list_txt">List of messages</string>
+    <string name="fn_infos">Firstname</string>
+    <string name="ln_infos">Lastname</string>
+    <string name="email_ifos">Email</string>
 
 
+    <!-- **************************************************************** -->
+    <!-- ****************************OTHER*****************************  -->
+    <!-- **************************************************************** -->
+    <!-- dialogue-->
+    <string name="empty_field_warning">Please fill in all fields</string>
+    <string name="invalid_phone_number_warning">Invalide phone number</string>
+    <string name="invalid_national_id_warning">Invalid national ID</string>
+    <string name="invalid_date_of_birth_warning">Invalide date of birth, must be DD-MM-YYYY</string>
+    <string name="Payed">Payed</string>
+    <string name="status_sub">Status</string>
+    <string name="pay_stat">Payed</string>
+    <string name="id_sub">Current ID</string>
+    <string name="refuse_request_dialogue">Refused successfully</string>
+    <string name="accept_request_dialogue">Accepted succefully</string>
 </resources>
 

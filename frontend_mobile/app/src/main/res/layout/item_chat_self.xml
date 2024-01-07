@@ -36,11 +36,11 @@
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Raystatic"
-                android:id="@+id/msg"
-                android:textColor="@color/black"/>
+                android:textColor="@color/primary"
+                tools:text="Raystatic" />
 
         </LinearLayout>
 

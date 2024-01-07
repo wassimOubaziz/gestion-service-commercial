@@ -61,4 +61,5 @@ dependencies {
     kapt("androidx.room:room-compiler:2.4.3") // Use kapt for room-compiler
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
+    implementation ("com.google.firebase:firebase-messaging:23.0.0")
 }

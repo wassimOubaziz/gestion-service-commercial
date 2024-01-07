@@ -11,6 +11,7 @@
         style="@style/ActionButtonStyle"
         android:layout_marginTop="16dp"
         android:contentDescription="menu"
+        android:onClick="openNavigationMenu"
         android:src="@drawable/menu_black"
         app:layout_constraintEnd_toStartOf="@+id/notif_btn"
         app:layout_constraintHorizontal_bias="0.004"
@@ -30,6 +31,7 @@
         android:id="@+id/user_btn"
         style="@style/ActionButtonStyle"
         android:contentDescription="user"
+        android:onClick="onUserButtonClick"
         android:src="@drawable/user_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

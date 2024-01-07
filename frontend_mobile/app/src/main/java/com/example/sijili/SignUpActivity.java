@@ -15,10 +15,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends BaseActivity {
     private EditText firstnameEditText, lastnameEditText, emailEditText, passwordEditText;
 
-    private String BASE_URL = "http://192.168.1.41:4000";
+    private String BASE_URL = "http://192.168.140.221:4000";
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
 
@@ -54,12 +54,14 @@ public class SignUpActivity extends AppCompatActivity {
         // Create a SignupRequest object to send to the server
         SignupRequest signupRequest = new SignupRequest(firstName, lastName, email, password);
 
+        showLoadingDialog();
         // Call the sign-up API endpoint
         Call<Void> call = retrofitInterface.executeSignup(signupRequest);
 
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+                dismissLoadingDialog();
                 if (response.isSuccessful()) {
                     // Handle successful sign-up response
                     Toast.makeText(SignUpActivity.this, "Sign-up successful", Toast.LENGTH_SHORT).show();
@@ -75,6 +77,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
+                dismissLoadingDialog();
                 // Handle network errors or other failures
                 Toast.makeText(SignUpActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }

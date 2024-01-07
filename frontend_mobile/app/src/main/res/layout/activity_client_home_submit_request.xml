@@ -54,7 +54,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/action_btns" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/welcomeClientText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -73,7 +73,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4">
+                app:layout_constraintTop_toBottomOf="@+id/welcomeClientText">
 
 
                 <EditText
@@ -112,7 +112,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/edit_text_form"
                 android:ems="10"
-                android:hint="@string/phone_sub"
+                android:hint="@string/phone_sub_ex"
                 android:inputType="phone"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
@@ -150,16 +150,17 @@
 
                 <EditText
                     android:id="@+id/editDate"
-                    android:layout_width="wrap_content"
+                    android:layout_width="248dp"
                     android:layout_height="56dp"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_form"
                     android:ems="10"
-                    android:hint="@string/Date_sub"
+                    android:hint="@string/Date_sub_ex"
                     android:inputType="date"
                     android:paddingStart="16dp"
-                    android:paddingEnd="16dp" />
+                    android:paddingEnd="16dp"
+                    android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/enteredNationality"
@@ -182,7 +183,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/edit_text_form"
                 android:ems="10"
-                android:hint="@string/nat_id_sub"
+                android:hint="@string/nat_id_sub_ex"
                 android:inputType="phone"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"

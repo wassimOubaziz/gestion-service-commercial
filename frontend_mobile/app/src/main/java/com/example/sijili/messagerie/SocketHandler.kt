@@ -128,6 +128,6 @@ class SocketHandler(private val authToken: String) {
     }
 
     companion object {
-        private const val SOCKET_URL = "http://192.168.1.41:4000/"
+        private const val SOCKET_URL = "http://192.168.140.221:4000/"
     }
 }

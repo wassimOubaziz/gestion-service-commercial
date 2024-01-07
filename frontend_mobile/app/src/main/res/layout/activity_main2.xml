@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChatActivity"
+    android:background="@color/white"
     android:paddingHorizontal="16dp"
     android:paddingVertical="8dp"
-    android:background="@color/black">
+    tools:context=".messagerie.ChatActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvChat"
@@ -26,25 +26,26 @@
         android:id="@+id/etMsg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnSend"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/edit_text_form"
         android:hint="Enter message"
+        android:padding="16dp"
+        android:layout_marginEnd="16dp"
         android:textColor="@color/white"
         android:textColorHint="@color/gray"
-        android:backgroundTint="@color/purple_200"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnSend"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etMsg"
-        app:layout_constraintBottom_toBottomOf="@+id/etMsg"
+        android:background="@drawable/secondary_color_button"
         android:text="Send"
-        android:backgroundTint="@color/purple_200"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/etMsg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/etMsg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
