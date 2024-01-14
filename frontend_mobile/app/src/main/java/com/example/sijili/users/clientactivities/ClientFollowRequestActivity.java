@@ -33,7 +33,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ClientFollowRequestActivity extends BaseActivity {
-    private static final String BASE_URL = "http://192.168.140.221:4000"; // Replace with your server URL
+    private static final String BASE_URL = "http://192.168.43.59:4000"; // Replace with your server URL
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
     private RecyclerView recyclerView;

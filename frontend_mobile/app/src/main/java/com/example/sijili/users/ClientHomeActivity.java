@@ -12,6 +12,7 @@ import android.os.Bundle;
 import com.example.sijili.BaseActivity;
 import com.example.sijili.R;
 import com.example.sijili.messagerie.ChatActivity;
+import com.example.sijili.messagerie.SocketHandler;
 import com.example.sijili.other.NavigationUtil;
 import com.example.sijili.users.clientactivities.ClientFollowRequestActivity;
 import com.example.sijili.users.clientactivities.ClientHomeSubmitRequestActivity;
@@ -41,7 +42,10 @@ public class ClientHomeActivity extends BaseActivity {
 
         // Setup navigation drawer
         setupNavigationDrawer();
+
+
     }
+
 
     private void displayClientName() {
         SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);

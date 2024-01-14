@@ -52,7 +52,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CommerceRequestAdapter extends RecyclerView.Adapter<CommerceRequestAdapter.ViewHolder> {
 
     private List<CommerceRequest> commerceRequests;
-    private static final String BASE_URL = "http://192.168.140.221:4000"; // Replace with your server URL
+    private static final String BASE_URL = "http://192.168.43.59:4000"; // Replace with your server URL
 
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;

@@ -79,4 +79,8 @@ public interface RetrofitInterface {
 
     @GET("/server/messages")
     Call<List<MessageRequest>> getMessages();
+
+    @PUT("/logout")
+    Call<Void> logout(@Header("Authorization")String authToken);
+
 }

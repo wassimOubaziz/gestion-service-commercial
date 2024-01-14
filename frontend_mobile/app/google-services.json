@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "573884920640",
+    "project_id": "register-commerce",
+    "storage_bucket": "register-commerce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:573884920640:android:234eb2a4a0f288dbe7c0a5",
+        "android_client_info": {
+          "package_name": "com.example.sijili"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAK6Jx2lC-LWzxob9-7RTCdMhGSOG7veUU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

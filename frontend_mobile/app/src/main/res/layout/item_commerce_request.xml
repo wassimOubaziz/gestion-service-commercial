@@ -68,10 +68,10 @@
 
         <ImageButton
             android:id="@+id/refuseButton"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:background="@color/transparent"
-            android:src="@drawable/refuse_icon_24"
+            android:src="@drawable/round_close_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -9,8 +9,12 @@ public class LoginRequest {
     @SerializedName("password")
     private String password;
 
-    public LoginRequest(String email, String password) {
+    @SerializedName("fcmToken")
+    private String fcmToken;
+
+    public LoginRequest(String email, String password, String fcmToken) {
         this.email = email;
         this.password = password;
+        this.fcmToken = fcmToken;
     }
 }

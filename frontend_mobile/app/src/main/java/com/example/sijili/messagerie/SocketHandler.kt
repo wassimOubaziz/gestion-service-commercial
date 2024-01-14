@@ -33,11 +33,11 @@ class SocketHandler(private val authToken: String) {
             val options = IO.Options()
             options.query = "token=$authToken"
             socket = IO.socket(SOCKET_URL, options)
-
             socket?.on(Socket.EVENT_CONNECT, Emitter.Listener {
                 Log.d("SocketHandler", "Socket connected")
                 _onSocketConnected.postValue(true)
-                registerOnNewChat()
+
+
             })?.on(Socket.EVENT_CONNECT_ERROR, Emitter.Listener { args ->
                 Log.e("SocketHandler", "Socket connection error: ${args[0].toString()}")
                 Log.e("SocketHandler", "url $SOCKET_URL")
@@ -53,7 +53,7 @@ class SocketHandler(private val authToken: String) {
         }
     }
 
-    private fun registerOnNewChat() {
+    fun registerOnNewChat() {
         socket?.on(CHAT_KEYS.BROADCAST, Emitter.Listener { args ->
             args?.let { d ->
                 if (d.isNotEmpty()) {
@@ -95,6 +95,18 @@ class SocketHandler(private val authToken: String) {
         })
     }
 
+
+    fun connectSocket() {
+        if (socket?.connected() != true) {
+            initializeSocket()
+        }
+    }
+
+
+
+
+
+
     fun joinRoom(roomId: String) {
         if (socket?.connected() == true) {
             // Emit the join_room event with the provided roomId and authentication token
@@ -128,6 +140,6 @@ class SocketHandler(private val authToken: String) {
     }
 
     companion object {
-        private const val SOCKET_URL = "http://192.168.140.221:4000/"
+        private const val SOCKET_URL = "http://192.168.43.59:4000/"
     }
 }

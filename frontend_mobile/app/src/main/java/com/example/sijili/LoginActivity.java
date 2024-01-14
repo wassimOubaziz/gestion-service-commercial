@@ -3,6 +3,7 @@ package com.example.sijili;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.sijili.messagerie.SocketHandler;
 import com.example.sijili.other.LoadingActivity;
 import com.example.sijili.users.ClientHomeActivity;
 import com.example.sijili.users.ServerHomeActivity;
@@ -27,8 +29,10 @@ public class LoginActivity extends BaseActivity {
     private EditText emailEditText, passwordEditText;
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
-    private String BASE_URL = "http://192.168.140.221:4000";
+    private String BASE_URL = "http://192.168.43.59:4000";
     private AlertDialog loginDialog;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +52,14 @@ public class LoginActivity extends BaseActivity {
                 .build();
 
         retrofitInterface = retrofit.create(RetrofitInterface.class);
+
+
+
+
     }
+
+
+
 
     public void loginHandler(View view) {
         String email = emailEditText.getText().toString().trim();
@@ -57,9 +68,10 @@ public class LoginActivity extends BaseActivity {
             Toast.makeText(this, "Email and password are required", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
+        String fcmToken = preferences.getString("fcm_token", null);
         // Create a LoginRequest object to send to the server
-        LoginRequest loginRequest = new LoginRequest(email, password);
+        LoginRequest loginRequest = new LoginRequest(email, password, fcmToken);
         showLoadingDialog();
         // Call the login API endpoint
         Call<LoginResponse> call = retrofitInterface.executeLogin(loginRequest);
@@ -69,13 +81,12 @@ public class LoginActivity extends BaseActivity {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 dismissLoadingDialog();
                 if (response.isSuccessful()) {
+
+
                     LoginResponse loginResponse = response.body();
 
                     if (loginResponse.isSuccess()) {
                         String token = loginResponse.getToken();
-
-                        // Save the token to SharedPreferences
-                        SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString("token", token);
 

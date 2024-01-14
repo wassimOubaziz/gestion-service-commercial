@@ -13,7 +13,8 @@ router.get("/posts", async (req, res) => {
 
 router.get("/users", async (req, res) => {
   try {
-    const users = await User.find();
+    //get all the users do not get only the users with the role admin
+    const users = await User.find({ role: { $ne: "admin" } });
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -45,6 +46,21 @@ router.delete("/users/:id", async (req, res) => {
     }
 
     res.status(200).json({ message: "User deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.put("/users/:id", async (req, res) => {
+  try {
+    const userId = req.params.id;
+    //get new user
+    const body = req.body;
+    const newUser = await User.findByIdAndUpdate(userId, body, { new: true });
+    if (!newUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json(newUser);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -83,6 +99,25 @@ router.get("/posts/:userId", async (req, res) => {
     const businessRequests = await BusinessRequest.find({ userId });
 
     res.status(200).json(businessRequests);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.patch("/users/:id/only-client", async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    // Update the user's role using findByIdAndUpdate
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    user.role = ["client"];
+    await user.save();
+    res
+      .status(200)
+      .json({ message: "User role updated successfully", user: user });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

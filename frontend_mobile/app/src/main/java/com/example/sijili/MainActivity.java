@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.example.sijili.users.ClientHomeActivity;
 import com.example.sijili.users.ServerHomeActivity;
+import com.google.firebase.FirebaseApp;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FirebaseApp.initializeApp(this);
 
         if (isLoggedIn()) {
             redirectToHomeScreen();

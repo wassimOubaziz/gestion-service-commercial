@@ -5,8 +5,8 @@ const User = require("./../model/User"); // Adjust the path based on your projec
 
 router.post("/", async (req, res) => {
   try {
-    const { email, password } = req.body;
-    console.log(email, password);
+    const { email, password, fcmToken } = req.body;
+    console.log(fcmToken);
     if (!email || !password) {
       return res
         .status(400)
@@ -34,6 +34,7 @@ router.post("/", async (req, res) => {
     });
 
     user.active = true;
+    user.fcmToken = fcmToken;
     await user.save({ validateBeforeSave: false });
 
     user.password = undefined;
@@ -46,11 +47,13 @@ router.post("/", async (req, res) => {
       ),
       httpOnly: true,
     });
-
     res.status(200).json({
       status: "success",
       token,
       role: user.role,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      email: user.email,
     });
   } catch (e) {
     res.status(400).json({ message: e.message });

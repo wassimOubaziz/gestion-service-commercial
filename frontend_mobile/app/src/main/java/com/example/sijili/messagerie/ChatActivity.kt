@@ -32,6 +32,7 @@ class ChatActivity : AppCompatActivity() {
 
         // Pass the token to SocketHandler
         socketHandler = SocketHandler(authToken)
+        socketHandler.registerOnNewChat();
 
         // Observe old messages
         socketHandler.onOldMessages.observe(this, Observer { oldMessages ->
@@ -83,7 +84,7 @@ class ChatActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        socketHandler.disconnectSocket()
+//        socketHandler.disconnectSocket()
         super.onDestroy()
     }
 

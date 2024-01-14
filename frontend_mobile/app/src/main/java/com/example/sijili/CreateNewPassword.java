@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CreateNewPassword extends BaseActivity {
 
-    private String BASE_URL = "http://192.168.140.221:4000";
+    private String BASE_URL = "http://192.168.43.59:4000";
     private Retrofit retrofit;
 
 

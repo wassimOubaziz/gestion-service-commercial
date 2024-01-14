@@ -10,8 +10,24 @@ const login = require("./routes/login");
 const client = require("./routes/client");
 const verify = require("./routes/verify");
 const server = require("./routes/server");
+const rating = require("./routes/rating");
 const admin = require("./routes/admin");
 const forgotPassword = require("./routes/forgetPassword");
+const logout = require("./routes/logout");
+var admine = require("firebase-admin");
+
+var serviceAccount = require("./register-commerce-firebase-adminsdk-gdqfy-a26084119b.json");
+
+admine.initializeApp({
+  credential: admine.credential.cert(serviceAccount),
+  databaseURL:
+    "https://register-commerce-default-rtdb.europe-west1.firebasedatabase.app",
+});
+
+// app.use((req, res, next) => {
+//   req.io = app.get("io");
+//   next();
+// });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -43,6 +59,9 @@ app.use("/verify", verify);
 app.use("/client", protect, permition("client"), client);
 app.use("/server", server);
 app.use("/admin", admin);
+app.use("/rating", protect, rating);
+
+app.use("/logout", protect, logout);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

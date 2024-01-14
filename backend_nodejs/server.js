@@ -1,5 +1,3 @@
-// app.js or index.js
-
 require("dotenv").config();
 const express = require("express");
 const http = require("http");
@@ -7,9 +5,6 @@ const mongoose = require("mongoose");
 const initializeSocket = require("./socket");
 
 const app = require("./app");
-const server = http.createServer(app);
-
-// Add your middleware and route configurations here
 
 // Connect to MongoDB
 const URL = process.env.URL;
@@ -26,9 +21,13 @@ mongoose
   .then(() => {
     const PORT = process.env.PORT || "3600";
 
-    // Pass the server instance to initializeSocket
-    const io = initializeSocket(server);
+    // Create an HTTP server using the Express app
+    const server = http.createServer(app);
 
+    // Pass the server instance to initializeSocket
+    initializeSocket(server);
+
+    // Start listening on the specified port
     server.listen(PORT, "0.0.0.0", () => {
       console.log(`Server listening on http://localhost:${PORT}`);
     });

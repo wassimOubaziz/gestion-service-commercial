@@ -3,16 +3,16 @@ const User = require("./../model/User");
 const BusinessRequest = require("./../model/BusinessRequest");
 const Message = require("./../model/Message");
 const moment = require("moment");
-const FCM = require("fcm-node");
-
-// Initialize FCM with your server key
-const fcm = new FCM(process.env.MY_FCM_SERVER_KEY);
+const admin = require("firebase-admin");
+const nodemailer = require("nodemailer");
 
 // GET all business requests
 router.get("/posts", async (req, res) => {
   try {
     // Find all business requests that are only in progress
-    const allRequests = await BusinessRequest.find({ status: "in progress" });
+    const allRequests = await BusinessRequest.find({
+      status: "in progression",
+    });
 
     if (!allRequests || allRequests.length === 0) {
       return res.status(404).json({ message: "No business requests found" });
@@ -43,15 +43,18 @@ router.get("/posts/:id", async (req, res) => {
 });
 
 // PUT update status of a specific post by ID
+
 router.put("/posts/:id", async (req, res) => {
   try {
     const postId = req.params.id;
-
+    console.log("yess");
     const updatedPost = await BusinessRequest.findByIdAndUpdate(
       postId,
       { status: "completed" },
       { new: true }
     );
+
+    console.log(updatedPost);
 
     if (!updatedPost) {
       return res.status(404).json({ message: "Post not found" });
@@ -63,21 +66,59 @@ router.put("/posts/:id", async (req, res) => {
       return res.status(404).json({ message: "Client user not found" });
     }
 
+    // Save notification to Firebase Realtime Database
+    const notificationRef = admin.database().ref("notifications");
+    const newNotificationRef = notificationRef.push();
+
+    const notificationData = {
+      userId: clientUser._id,
+      title: "Business Request Completed",
+      body: "Your business request has been completed. You can download the PDF now.",
+      timestamp: admin.database.ServerValue.TIMESTAMP,
+    };
+
+    //send an email
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_SECRET,
+        pass: process.env.PASSWORD_SECRET,
+      },
+    });
+    try {
+      await transporter.sendMail({
+        from: process.env.EMAIL_SECRET,
+        to: clientUser.email,
+        subject: "Your business request has been completed",
+        text: `Your business request has been completed. You can download the PDF now.`,
+        html: `<div style="background-color: #f2f2f2; padding: 20px;">
+        <h2>Your business request has been completed</h2>
+        <p>You can download the PDF now.</p>`,
+      });
+    } catch (e) {
+      throw new Error("Failed to send verification email");
+    }
+
+    if (
+      clientUser.fcmToken === undefined ||
+      clientUser.fcmToken === "" ||
+      clientUser.fcmToken === null
+    ) {
+      return res.status(200).json(updatedPost);
+    }
+
+    newNotificationRef.set(notificationData);
+    // Send FCM notification using Firebase Admin SDK
     const message = {
-      to: clientUser.deviceToken,
+      token: clientUser.fcmToken,
       notification: {
         title: "Business Request Completed",
         body: "Your business request has been completed. You can download the PDF now.",
       },
     };
 
-    fcm.send(message, function (err, response) {
-      if (err) {
-        console.log("Error sending notification:", err);
-      } else {
-        console.log("Notification sent successfully:", response);
-      }
-    });
+    const response = await admin.messaging().send(message);
+    console.log("Notification sent successfully:", response);
 
     res.status(200).json(updatedPost);
   } catch (error) {

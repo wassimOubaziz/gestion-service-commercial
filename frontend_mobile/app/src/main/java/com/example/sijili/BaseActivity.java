@@ -24,23 +24,40 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.sijili.other.NavigationUtil;
+import com.example.sijili.other.NotificationDialogFragment;
+import com.example.sijili.requests.CommerceRequest;
 import com.example.sijili.users.ClientHomeActivity;
 import com.example.sijili.users.ServerHomeActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     protected DrawerLayout drawerLayout;
+
+    private String BASE_URL = "http://192.168.43.59:4000";
     protected NavigationView navigationView;
+    private RetrofitInterface retrofitInterface;
+    private Retrofit retrofit;
     private AlertDialog loadingDialog;
     private ImageButton notificationButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
     }
 
     protected void setupNavigationDrawer() {
@@ -80,18 +97,21 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             notificationButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Handle click on notification button
-                    // You can open a notification activity or show a custom view as per your requirement
-                    // For example, you can show a Snackbar with the notification content
-                    showNotificationSnackbar("This is a notification message.");
+                    List<String> sampleNotifications = new ArrayList<>();
+                    for (int i = 1; i < 10; i++) {
+                        sampleNotifications.add("Notification" + i);
+                    }
+
+                    showNotificationDialog(sampleNotifications);
                 }
             });
         }
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(this);
     }
-    private void showNotificationSnackbar(String message) {
-        Snackbar    .make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
+    private void showNotificationDialog(List<String> notifications) {
+        NotificationDialogFragment dialogFragment = new NotificationDialogFragment(notifications);
+        dialogFragment.show(getSupportFragmentManager(), "notification_dialog");
     }
     public void openNavigationMenu() {
         // Open the navigation menu
@@ -282,13 +302,44 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     private void logoutHandler(){
         SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.remove("token");
-        editor.apply();
 
-        // Redirect to the login screen
-        Intent intent = new Intent(BaseActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
+        // Ensure retrofit is not null before using it
+
+
+        //delete device identifier
+        retrofitInterface = retrofit.create(RetrofitInterface.class);
+
+        // Ensure retrofitInterface is not null before using it
+
+
+        String authToken = "Bearer " + preferences.getString("token", "");
+
+        // Ensure authToken is not null before using it
+        if (authToken == null) {
+            // Handle the situation where authToken is null
+            Log.e("LOGOUT", "Auth token is null");
+            return;
+        }
+
+        retrofitInterface.logout(authToken).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+                // Remove token and redirect
+                editor.remove("token");
+                editor.apply();
+
+                // Redirect to the login screen
+                Intent intent = new Intent(BaseActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("LOGOUT", "Error logging out: " + t.getMessage());
+            }
+        });
     }
     private void setLocale(String languageCode) {
         // Set the selected language code and recreate the activity

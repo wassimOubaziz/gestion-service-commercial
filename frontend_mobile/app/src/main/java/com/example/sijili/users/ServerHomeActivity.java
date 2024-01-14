@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.sijili.BaseActivity;
 import com.example.sijili.R;
+import com.example.sijili.messagerie.SocketHandler;
 import com.example.sijili.other.NavigationUtil;
 import com.example.sijili.users.serveractivities.ServerManageRequestsActivity;
 import com.example.sijili.users.serveractivities.ServerMessagesActivity;
@@ -27,7 +28,10 @@ public class ServerHomeActivity extends BaseActivity {
         displayClientName();
         setupNavigationDrawer();
         showToken();
+
     }
+
+
     private void displayClientName() {
         SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
         String name = preferences.getString("name", "");
