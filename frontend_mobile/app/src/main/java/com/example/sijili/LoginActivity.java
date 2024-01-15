@@ -96,6 +96,7 @@ public class LoginActivity extends BaseActivity {
                         String lastName = loginResponse.getLast_name();
                         String name = loginResponse.getFirst_name() + " " + loginResponse.getLast_name();
                         String email = loginResponse.getEmail();
+                        String userId = loginResponse.getUserId();
                         if (roles != null && roles.size() > 0) {
                             editor.putString("role", roles.get(0));
                             editor.putInt("roleSize", roles.size());
@@ -105,9 +106,9 @@ public class LoginActivity extends BaseActivity {
                         editor.putString("firstName", firstName);
                         editor.putString("lastName", lastName);
                         editor.putString("email", email);
+                        editor.putString("userId", userId);
                         editor.apply();
 
-                        Toast.makeText(LoginActivity.this, "Login successful. Token: " + token, Toast.LENGTH_SHORT).show();
                         if (roles.get(0).equals("client")) {
                             Intent intent = new Intent(LoginActivity.this, ClientHomeActivity.class);
                             startActivity(intent);
@@ -120,7 +121,6 @@ public class LoginActivity extends BaseActivity {
                     } else {
                         // Handle unsuccessful login response
                         String errorMessage = loginResponse.getMessage();
-                        System.out.println("*****asd" + errorMessage);
                         if (errorMessage != null && !errorMessage.isEmpty()) {
                             Toast.makeText(LoginActivity.this, "Wrong email or password! " + errorMessage, Toast.LENGTH_SHORT).show();
                         } else {
@@ -137,7 +137,7 @@ public class LoginActivity extends BaseActivity {
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 dismissLoadingDialog();
                 // Handle network errors or other failures
-                Toast.makeText(LoginActivity.this, "No internet" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Network error", Toast.LENGTH_SHORT).show();
             }
 
         });

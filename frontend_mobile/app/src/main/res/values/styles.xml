@@ -80,7 +80,7 @@
 
 
     <style name="TableHeaderStyle">
-        <item name="android:background">#1E232C</item>
+        <item name="android:background">@color/transparent</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
 
@@ -90,9 +90,9 @@
         <item name="android:layout_height">50dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:gravity">center|left</item>
+<!--        <item name="android:textAlignment">center</item>-->
+        <item name="android:textColor">@color/primary</item>
         <item name="android:textSize">18sp</item>
     </style>
 
@@ -101,12 +101,11 @@
         <!-- Customize text color, alignment, etc., as needed -->
 <!--        <item name="android:layout_width">wrap_content</item>-->
         <item name="android:layout_height">40dp</item>
-        <item name="android:textAlignment">center</item>
+<!--        <item name="android:textAlignment">center</item>-->
         <item name="android:textColor">#000000</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:gravity">center</item>
-        <!-- Add background color for alternating rows -->
-        <item name="android:background">#FBFBFB</item>
+        <item name="android:gravity">center|left</item>        <!-- Add background color for alternating rows -->
+        <item name="android:background">#FDFDFD</item>
         <!-- Add borders to cells -->
         <item name="android:layout_margin">1dp</item>
         <item name="android:layout_gravity">center</item>
@@ -118,6 +117,9 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <style name="secondary_button">
+        <item name="android:textColor">#000000</item>
+    </style>
     <!-- strings.xml -->
 
 

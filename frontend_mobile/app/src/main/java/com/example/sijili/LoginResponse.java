@@ -16,7 +16,8 @@ public class LoginResponse {
     // You can add more fields based on your server response
     @SerializedName("token")
     private String token;
-
+    @SerializedName("userId")
+    private String userId;
     @SerializedName("role")
     private List<String> role;
 
@@ -56,5 +57,8 @@ public class LoginResponse {
     }
     public String getEmail() {
         return email;
+    }
+    public String getUserId() {
+        return userId;
     }
 }

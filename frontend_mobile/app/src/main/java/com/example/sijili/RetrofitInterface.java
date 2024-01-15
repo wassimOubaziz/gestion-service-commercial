@@ -4,9 +4,11 @@ import com.example.sijili.requests.BusinessRequest;
 import com.example.sijili.requests.CommerceRequest;
 import com.example.sijili.requests.EmailRequest;
 import com.example.sijili.requests.MessageRequest;
+import com.example.sijili.requests.NotificationsRequest;
 import com.example.sijili.requests.OTPRequest;
 import com.example.sijili.requests.PasswordResetRequest;
 import com.example.sijili.requests.SignupRequest;
+import com.example.sijili.requests.User;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -34,11 +36,14 @@ public interface RetrofitInterface {
     @POST("/verify")
     Call<Void> verifyOtp(@Body OTPRequest otpRequest);
 
+
+    @PUT("/admin/users/{id}")
+    Call<User> saveUser(@Path("id") String userId, @Body User user);
     /*#################################################
     /-------------forgotAndReseatPassword-----------------
      #################################################*/
 
-    @POST("/forgot-password/forgot-password")
+    @POST("/forgot-password")
     Call<Void> forgotPassword(@Body EmailRequest emailRequest);
 
     @POST("/forgot-password/reset-password")
@@ -62,6 +67,16 @@ public interface RetrofitInterface {
 
     @GET("/client/{id}/register-pdf")
     Call<ResponseBody> downloadPDF(@Header("Authorization")String authToken, @Path("id") String id);
+    @GET("/notifications")
+    Call<List<NotificationsRequest>> getNotifications(@Header("Authorization") String authToken);
+
+    @GET("/notifications/notif")
+    Call<Boolean> getNotificationSeenStatus(@Header("Authorization")String authToken);
+    @DELETE("/notifications/{timestamp}")
+    Call<Void> deleteNotification(
+            @Header("Authorization") String authToken,
+            @Path("timestamp") String timestamp
+    );
 
     /*#################################################
     /-------------------SERVER-----------------------
@@ -82,5 +97,7 @@ public interface RetrofitInterface {
 
     @PUT("/logout")
     Call<Void> logout(@Header("Authorization")String authToken);
+
+
 
 }

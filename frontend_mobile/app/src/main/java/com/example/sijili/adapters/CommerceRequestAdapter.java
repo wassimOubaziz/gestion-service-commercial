@@ -98,7 +98,6 @@ public class CommerceRequestAdapter extends RecyclerView.Adapter<CommerceRequest
                     Context context = holder.itemView.getContext();
                     Intent intent = new Intent(context, ServerRequestInfos.class);
                     intent.putExtra("requestId2", request.getId());
-                    Log.d("requestId", "" + request.getId());
                     context.startActivity(intent);
                 }
             });
@@ -179,13 +178,11 @@ public class CommerceRequestAdapter extends RecyclerView.Adapter<CommerceRequest
         SharedPreferences preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE);
         String authToken = "Bearer " + preferences.getString("token", "");
 
-        Log.d("tokeeen", ""+authToken);
         Call<CommerceRequest> call = retrofitInterface.updateBusinessRequestStatus(authToken, requestId);
 
         call.enqueue(new Callback<CommerceRequest>() {
             @Override
             public void onResponse(Call<CommerceRequest> call, Response<CommerceRequest> response) {
-                Log.d("ResponseAccept", ""+ response);
                 if (response.isSuccessful()) {
                     // Handle successful update
                     CommerceRequest updatedRequest = response.body();
@@ -204,7 +201,7 @@ public class CommerceRequestAdapter extends RecyclerView.Adapter<CommerceRequest
             @Override
             public void onFailure(Call<CommerceRequest> call, Throwable t) {
                 // Handle network errors or other failures
-                Toast.makeText(context, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Network error", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -219,13 +216,12 @@ public class CommerceRequestAdapter extends RecyclerView.Adapter<CommerceRequest
         SharedPreferences preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE);
         String authToken = "Bearer " + preferences.getString("token", "");
 
-        Log.d("tokeeen", ""+authToken);
         Call<Void> call = retrofitInterface.deleteCommerceRequest(authToken, requestId);
 
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Log.d("ResponseRefuse", ""+ response);
+
 
                 if (response.isSuccessful()) {
                     // Handle successful deletion, if needed
@@ -242,6 +238,7 @@ public class CommerceRequestAdapter extends RecyclerView.Adapter<CommerceRequest
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 // Handle network errors or other failures
+                Toast.makeText(context, "Network error. Please try again later.", Toast.LENGTH_SHORT).show();
             }
         });
     }

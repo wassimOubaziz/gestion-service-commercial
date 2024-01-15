@@ -9,20 +9,70 @@
     <TextView
         android:id="@+id/textViewActivityType"
         style="@style/DataRowsStyle"
+        android:layout_weight="0.8"
         android:text="Activity" />
 
     <TextView
         android:id="@+id/textViewCompanyName"
         style="@style/DataRowsStyle"
+        android:layout_weight="0.8"
+
         android:text="Company" />
 
     <TextView
         android:id="@+id/textViewStatus"
         style="@style/DataRowsStyle"
+        android:layout_weight="0.8"
+
         android:text="Status" />
 
-    <TextView
-        android:id="@+id/textViewPay"
+    <ImageView
+        android:id="@+id/imageViewPay"
         style="@style/DataRowsStyle"
-        android:text="Pay" />
-</TableRow>
+        android:src="@drawable/paid_icon"
+        android:layout_weight="1" />
+
+</TableRow><!--<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">-->
+
+    <!--<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tableRowClicked"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/textViewActivityType"
+            style="@style/DataRowsStyle"
+            android:text="activity"
+            android:layout_weight="2" />
+
+        <TextView
+            android:id="@+id/textViewCompanyName"
+            style="@style/DataRowsStyle"
+            android:text="company"
+            android:layout_weight="2" />
+
+        <TextView
+            android:id="@+id/textViewStatus"
+            style="@style/DataRowsStyle"
+            android:text="status"
+            android:layout_weight="2" />
+
+        &lt;!&ndash;<ImageView
+            android:id="@+id/imageViewPay"
+            style="@style/DataRowsStyle"
+            android:src="@drawable/paid_icon"
+            android:layout_weight="1" />&ndash;&gt;
+    </LinearLayout>-->
+
+    <!-- Add your line separator view below the TableRow -->
+    <!--<View
+        android:id="@+id/lineSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />-->
+    <!--</TableLayout>-->

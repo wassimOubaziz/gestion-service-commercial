@@ -111,5 +111,23 @@
         app:layout_constraintTop_toBottomOf="@+id/otpContainer"
         app:layout_constraintVertical_bias="0" />
 
+    <TextView
+        android:id="@+id/send_again"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="32dp"
+        android:gravity="center_horizontal|top"
+        android:lineSpacingExtra="-2sp"
+        android:onClick="send_again_pass_btn"
+        android:text="@string/send_again"
+        android:textAppearance="@style/registre"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/verify_btn"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

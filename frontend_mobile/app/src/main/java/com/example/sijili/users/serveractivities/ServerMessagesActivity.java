@@ -92,7 +92,7 @@ public class ServerMessagesActivity extends BaseActivity {
             public void onFailure(Call<List<MessageRequest>> call, Throwable t) {
                 dismissLoadingDialog();
                 // Handle failure
-                Toast.makeText(ServerMessagesActivity.this, "fetch 4 failed", Toast.LENGTH_LONG).show();
+                Toast.makeText(ServerMessagesActivity.this, "Network error", Toast.LENGTH_LONG).show();
             }
         });
     }

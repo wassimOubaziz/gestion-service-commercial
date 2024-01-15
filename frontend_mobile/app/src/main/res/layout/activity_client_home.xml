@@ -72,7 +72,9 @@
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
                     android:text="@string/submit_request_btn"
-                    android:textAppearance="@style/btn_text" />
+                    android:textAppearance="@style/btn_text"
+
+                    />
 
                 <!-- Image on the right -->
                 <ImageView

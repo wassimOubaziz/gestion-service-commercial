@@ -24,7 +24,7 @@ public class CreateNewPassword extends BaseActivity {
     private Retrofit retrofit;
 
 
-    private EditText enteredNewPassword;
+    private EditText enteredNewPassword,enteredNewPasswordConfirm ;
 
     RetrofitInterface retrofitInterface;
     @Override
@@ -33,6 +33,7 @@ public class CreateNewPassword extends BaseActivity {
         setContentView(R.layout.activity_create_new_password);
 
         enteredNewPassword = findViewById(R.id.enteredNewPassword);
+        enteredNewPasswordConfirm = findViewById(R.id.enteredNewPasswordConfirm);
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -45,33 +46,41 @@ public class CreateNewPassword extends BaseActivity {
     public void passToVerifiedSection(View view) {
         String email = getIntent().getStringExtra("emailForPass");
         String newPassword = enteredNewPassword.getText().toString();
-        PasswordResetRequest passwordResetRequest = new PasswordResetRequest(email, newPassword);
+        String confirmPassword = enteredNewPasswordConfirm.getText().toString();
 
-        showLoadingDialog();
-        Call<Void> call = retrofitInterface.resetPassword(passwordResetRequest);
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                dismissLoadingDialog();
-                if (response.isSuccessful()) {
-                    // Password reset successful
-                    Toast.makeText(CreateNewPassword.this, "Password reset successful", Toast.LENGTH_SHORT).show();
-                    // Proceed to the next step, e.g., redirect to a new activity
-                    Intent intent = new Intent(CreateNewPassword.this, PasswordChanged.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    // Password reset failed
-                    Toast.makeText(CreateNewPassword.this, "Password reset failed", Toast.LENGTH_SHORT).show();
+        if (newPassword.equals(confirmPassword)) {
+            // Passwords match, proceed with the API call
+            PasswordResetRequest passwordResetRequest = new PasswordResetRequest(email, newPassword);
+
+            showLoadingDialog();
+            Call<Void> call = retrofitInterface.resetPassword(passwordResetRequest);
+            call.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    dismissLoadingDialog();
+                    if (response.isSuccessful()) {
+                        // Password reset successful
+                        Toast.makeText(CreateNewPassword.this, "Password reset successful", Toast.LENGTH_SHORT).show();
+                        // Proceed to the next step, e.g., redirect to a new activity
+                        Intent intent = new Intent(CreateNewPassword.this, PasswordChanged.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        // Password reset failed
+                        Toast.makeText(CreateNewPassword.this, "Password reset failed", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                dismissLoadingDialog();
-                // Handle network errors or other failures
-                Toast.makeText(CreateNewPassword.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    dismissLoadingDialog();
+                    // Handle network errors or other failures
+                    Toast.makeText(CreateNewPassword.this, "Network error", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            // Passwords don't match, show a toast message
+            Toast.makeText(CreateNewPassword.this, "Passwords don't match", Toast.LENGTH_SHORT).show();
+        }
     }
 }

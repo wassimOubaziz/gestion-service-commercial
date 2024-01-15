@@ -226,27 +226,19 @@ public class ClientFollowRequestInfos extends BaseActivity {
 
     public void printRequest(View view) {
         String requestId = getIntent().getStringExtra("requestId");
-        Log.d("RequestId", requestId);
         SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
         String authToken = "Bearer " + preferences.getString("token", "");
-        Log.d("authToken", authToken);
         showLoadingDialog();
         Call<ResponseBody> call = retrofitInterface.downloadPDF(authToken, requestId);
-        Log.d("test 1 :", "test");
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 dismissLoadingDialog();
-                Log.d("test onResponse :", "" + response);
+
                 if (response.isSuccessful()) {
-                    // Handle the successful response and open the PDF
-                    Log.d("test isSuccessful:", "" + response);
-                    Log.d("test isSuccessful Body:", "" + response.body());
                     ResponseBody responseBody = response.body();
                     openPdfInViewer(responseBody);
                 } else {
-                    Log.d("test notSuccessful:", "" + response);
-                    Log.d("test notSuccessful Body:", "" + response.body());
                     // Handle unsuccessful response
                     Toast.makeText(ClientFollowRequestInfos.this, "Failed to download PDF", Toast.LENGTH_SHORT).show();
                 }
@@ -255,7 +247,6 @@ public class ClientFollowRequestInfos extends BaseActivity {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 dismissLoadingDialog();
-                Log.d("test onFailure:", "" + t);
 
                 // Handle failure
                 Log.e("NetworkError", "Error: " + t.getMessage(), t);
@@ -326,7 +317,6 @@ public class ClientFollowRequestInfos extends BaseActivity {
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
             // Log to check if URI is correct
-            Log.d("PDF_URI", pdfUri.toString());
 
             try {
                 startActivity(intent);

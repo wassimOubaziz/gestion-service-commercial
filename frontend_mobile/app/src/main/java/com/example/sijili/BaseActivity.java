@@ -1,5 +1,6 @@
 package com.example.sijili;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +28,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.example.sijili.other.NavigationUtil;
 import com.example.sijili.other.NotificationDialogFragment;
 import com.example.sijili.requests.CommerceRequest;
+import com.example.sijili.requests.NotificationsRequest;
 import com.example.sijili.users.ClientHomeActivity;
 import com.example.sijili.users.ServerHomeActivity;
 import com.google.android.material.navigation.NavigationView;
@@ -50,6 +53,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     private Retrofit retrofit;
     private AlertDialog loadingDialog;
     private ImageButton notificationButton;
+    private LinearLayout lightModeButton, darkModeButton, followSystemButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +62,89 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+        fetchNotificationSeenStatus();
     }
+    public void openNavigationMenu() {
+        // Open the navigation menu
+        drawerLayout.openDrawer(GravityCompat.START);
+    }
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // Handle navigation item clicks here
+        int id = item.getItemId();
+
+        if (id == R.id.nav_home) {
+            goToHome();
+        } else if (id == R.id.nav_profile) {
+            goToProfile();
+        } else if (id == R.id.nav_professional_account) {
+            switchAccount();
+
+        } else if (id == R.id.nav_dark_mode) {
+            showThemeSelectionDialog();
+        } else if (id == R.id.nav_languages) {
+            showLanguageSelectionDialog();
+        } else if (id == R.id.nav_rate_us) {
+            showRatingDialog();
+        } else if (id == R.id.nav_logout) {
+            logoutHandler();
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+
+    private void fetchNotificationSeenStatus() {
+        // Get user token from SharedPreferences
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+        String authToken = "Bearer " + preferences.getString("token", "");
+
+        // Create Retrofit instance
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        // Create RetrofitInterface
+        RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
+
+        // Make a network request
+        Call<Boolean> call = retrofitInterface.getNotificationSeenStatus(authToken);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (response.isSuccessful()) {
+                    Boolean notificationSeenStatus = response.body();
+                    // Process the notificationSeenStatus
+                    if (notificationSeenStatus != null) {
+                        // Do something with the notificationSeenStatus
+                        if (notificationSeenStatus){
+                            notificationButton = findViewById(R.id.notif_btn);
+                            notificationButton.setImageResource(R.drawable.notification_bell_black);
+                        }else{
+                            notificationButton = findViewById(R.id.notif_btn);
+                            notificationButton.setImageResource(R.drawable.notification_black);
+                        }
+                    } else {
+                        // Handle null response
+
+                    }
+                } else {
+                    // Handle error
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Log.e("NetworkError", t.getMessage());
+                // Handle failure
+                showToast("Network error");
+            }
+        });
+    }
+
 
     protected void setupNavigationDrawer() {
         SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
@@ -97,58 +183,78 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             notificationButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    List<String> sampleNotifications = new ArrayList<>();
-                    for (int i = 1; i < 10; i++) {
-                        sampleNotifications.add("Notification" + i);
-                    }
 
-                    showNotificationDialog(sampleNotifications);
+                    retrieveNotificationsFromServerOrLocal();
                 }
             });
         }
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(this);
     }
-    private void showNotificationDialog(List<String> notifications) {
-        NotificationDialogFragment dialogFragment = new NotificationDialogFragment(notifications);
-        dialogFragment.show(getSupportFragmentManager(), "notification_dialog");
+
+    private void retrieveNotificationsFromServerOrLocal() {
+        // Get user ID from SharedPreferences
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+        String userId = preferences.getString("userId", "");
+        String authToken = "Bearer " + preferences.getString("token", "");
+
+        // Create Retrofit instance
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        // Create RetrofitInterface
+        retrofitInterface = retrofit.create(RetrofitInterface.class);
+
+        // Make a network request
+        showLoadingDialog();
+        Call<List<NotificationsRequest>> call = retrofitInterface.getNotifications(authToken);
+        call.enqueue(new Callback<List<NotificationsRequest>>() {
+            @Override
+            public void onResponse(Call<List<NotificationsRequest>> call, Response<List<NotificationsRequest>> response) {
+                dismissLoadingDialog();
+                if (response.isSuccessful()) {
+                    List<NotificationsRequest> userNotifications = response.body();
+                    // Process the list of NotificationsRequest objects
+                    showNotificationDialog(userNotifications);
+                } else {
+                    // Handle error
+                    showNotificationDialog(null);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<NotificationsRequest>> call, Throwable t) {
+                dismissLoadingDialog();
+                Log.e("NetworkError", t.getMessage());
+                showNotificationDialog(null);
+                // Handle failure
+                showToast("Network error");
+            }
+        });
     }
-    public void openNavigationMenu() {
-        // Open the navigation menu
-        drawerLayout.openDrawer(GravityCompat.START);
-    }
 
-    public void showToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation item clicks here
-        int id = item.getItemId();
-
-        if (id == R.id.nav_home) {
-            goToHome();
-        } else if (id == R.id.nav_profile) {
-            goToProfile();
-        } else if (id == R.id.nav_professional_account) {
-            switchAccount();
-
-        } else if (id == R.id.nav_dark_mode) {
-            showToast("Dark Mode selected");
-            showThemeSelectionDialog();
-        } else if (id == R.id.nav_languages) {
-            showToast("Languages selected");
-            showLanguageSelectionDialog();
-        } else if (id == R.id.nav_rate_us) {
-            showRatingDialog();
-        } else if (id == R.id.nav_logout) {
-            logoutHandler();
+    private void showNotificationDialog(List<NotificationsRequest> notifications) {
+        List<String> notificationMessages = new ArrayList<>();
+        List<String> notificationTimestamp = new ArrayList<>();
+        if (notifications != null && !notifications.isEmpty()) {
+            for (NotificationsRequest notification : notifications) {
+                notificationMessages.add(notification.getMessage());
+                notificationTimestamp.add(notification.getTimestamp());
+                //notificationMessages.add(notification.getTimestamp());
+            }
+        } else {
+            notificationMessages.add("No notifications");
         }
 
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
+        NotificationDialogFragment dialogFragment = new NotificationDialogFragment(notificationMessages, notificationTimestamp);
+        dialogFragment.show(getSupportFragmentManager(), "notification_dialog");
     }
+
+//    home
 
     private void goToHome() {
         SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
@@ -187,13 +293,14 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
         }
     }
+
     private void showLanguageSelectionDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = getLayoutInflater().inflate(R.layout.dialog_language_selection, null);
 
-        Button btnEnglish = view.findViewById(R.id.btnEnglish);
-        Button btnFrench = view.findViewById(R.id.btnFrench);
-
+        LinearLayout btnEnglish = view.findViewById(R.id.btnEnglish);
+        LinearLayout btnFrench = view.findViewById(R.id.btnFrench);
+        builder.setTitle("Select A Language");
         builder.setView(view);
 
         AlertDialog dialog = builder.create();
@@ -219,35 +326,69 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     private void showThemeSelectionDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Select Theme Mode")
-                .setSingleChoiceItems(new CharSequence[]{"Light Mode", "Dark Mode", "Follow System"}, -1, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switchThemeMode(which);
-                        dialog.dismiss();
-                    }
-                })
-                .create().show();
+
+        // Inflate the custom layout for the dialog
+        View view = getLayoutInflater().inflate(R.layout.theme_selection_dialog, null);
+        builder.setView(view)
+                .setTitle("Select Your Mode");
+
+        // Find the buttons in the custom layout
+        lightModeButton = view.findViewById(R.id.lightModeButton);
+        darkModeButton = view.findViewById(R.id.darkModeButton);
+        followSystemButton = view.findViewById(R.id.followSystemButton);
+
+        // Set click listeners for the buttons
+        AlertDialog dialog = builder.create();
+
+        lightModeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                switchThemeMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        });
+
+        darkModeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                switchThemeMode(AppCompatDelegate.MODE_NIGHT_YES);
+            }
+        });
+
+        followSystemButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                switchThemeMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+            }
+        });
+
+
+//        AlertDialog dialog = builder.create();
+        dialog.show();
     }
+
     private void switchThemeMode(int selectedMode) {
         int themeMode;
         switch (selectedMode) {
-            case 0: // Light Mode
+            case AppCompatDelegate.MODE_NIGHT_NO: // Light Mode
                 themeMode = AppCompatDelegate.MODE_NIGHT_NO;
                 break;
-            case 1: // Dark Mode
+            case AppCompatDelegate.MODE_NIGHT_YES: // Dark Mode
                 themeMode = AppCompatDelegate.MODE_NIGHT_YES;
                 break;
-            case 2: // Follow System
+            case AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM: // Follow System
                 themeMode = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM;
                 break;
             default:
                 return;
         }
 
+        // Apply the selected theme mode
         AppCompatDelegate.setDefaultNightMode(themeMode);
-        recreate(); // Recreate the activity to apply the new theme
     }
+
     private void switchAccount() {
         Class<?> currentActivityClass = this.getClass();
         Class<?> targetActivityClass;
@@ -299,7 +440,33 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 })
                 .create().show();
     }
-    private void logoutHandler(){
+
+
+
+    private void setLocale(String languageCode) {
+        Locale locale = new Locale(languageCode);
+        Locale.setDefault(locale);
+
+        Configuration config = new Configuration();
+        config.locale = locale;
+
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+
+        recreate();
+    }
+    private void showThanksDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Thanks for your rating!")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create().show();
+    }
+
+    private void logoutHandler() {
         SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
@@ -338,34 +505,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 Log.e("LOGOUT", "Error logging out: " + t.getMessage());
+                showToast("Network error");
             }
         });
     }
-    private void setLocale(String languageCode) {
-        // Set the selected language code and recreate the activity
-        Locale locale = new Locale(languageCode);
-        Locale.setDefault(locale);
 
-        Configuration configuration = new Configuration();
-        configuration.setLocale(locale);
-
-        Resources resources = getResources();
-        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
-
-        recreate(); // Recreate the activity to apply the new locale
-    }
-    private void showThanksDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Thanks!")
-                .setMessage("Thanks for your rating!")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .create().show();
-    }
 
     protected void showLoadingDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.TransparentDialog);
@@ -381,6 +525,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             loadingDialog.dismiss();
         }
     }
+    public void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+
     @Override
     public void onBackPressed() {
         if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START)) {

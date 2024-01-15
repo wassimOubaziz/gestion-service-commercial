@@ -23,13 +23,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         if (remoteMessage.getData().size() > 0) {
             // Handle data payload
-            Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+
+
         }
 
         if (remoteMessage.getNotification() != null) {
             // Handle notification payload
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-
             // Show notification to the user
             showNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
         }
@@ -37,7 +36,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     @Override
     public void onNewToken(@NonNull String token) {
-        Log.d(TAG, "Refreshed token: " + token);
 
         // Save the token to SharedPreferences or send it to your server
         saveFCMTokenLocally(token);

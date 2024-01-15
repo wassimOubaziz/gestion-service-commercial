@@ -27,7 +27,7 @@ public class ServerHomeActivity extends BaseActivity {
         setContentView(R.layout.activity_server_home);
         displayClientName();
         setupNavigationDrawer();
-        showToken();
+
 
     }
 
@@ -48,15 +48,7 @@ public class ServerHomeActivity extends BaseActivity {
         Intent intent = new Intent(ServerHomeActivity.this, ServerMessagesActivity.class);
         startActivity(intent);
     }
-    private void showToken(){
-        SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
-        String authToken = "Bearer "+ preferences.getString("token", "");
 
-        if (!authToken.isEmpty()) {
-            // Show the authentication token in a Toast
-            Toast.makeText(this, "Authentication Token: " + authToken, Toast.LENGTH_SHORT).show();
-        }
-    }
 
     public void onUserButtonClick(View view) {
         NavigationUtil.navigateToProfile(this);

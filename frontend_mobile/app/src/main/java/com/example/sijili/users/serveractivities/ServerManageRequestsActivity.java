@@ -76,7 +76,7 @@ public class ServerManageRequestsActivity extends BaseActivity {
             public void onFailure(Call<List<CommerceRequest>> call, Throwable t) {
                 dismissLoadingDialog();
                 // Handle network errors or other failures
-                Toast.makeText(ServerManageRequestsActivity.this, "fetch 4 failed", Toast.LENGTH_LONG).show();
+                Toast.makeText(ServerManageRequestsActivity.this, "Network error", Toast.LENGTH_LONG).show();
             }
         });
     }

@@ -73,35 +73,50 @@
                 app:layout_constraintTop_toBottomOf="@+id/welcomeClientText">
 
                 <!-- Header Row -->
-                <TableRow
+                <LinearLayout
                     android:id="@+id/header_"
                     style="@style/TableHeaderStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <TextView
                         style="@style/DataRowsHeaderStyle"
+                        android:layout_weight="2"
                         android:text="Activity" />
 
                     <TextView
                         style="@style/DataRowsHeaderStyle"
+                        android:layout_weight="2"
                         android:text="Company" />
 
                     <TextView
                         style="@style/DataRowsHeaderStyle"
+                        android:layout_weight="3"
                         android:text="Status" />
 
                     <TextView
                         style="@style/DataRowsHeaderStyle"
+                        android:layout_weight="1"
                         android:text="Pay" />
-                </TableRow>
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/lineSeparator"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/header_" />
 
                 <!-- Sample Data Rows (Add more rows as needed) -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewMyRequests"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                     />
+                    android:layout_height="wrap_content" />
 
 
                 <!-- Add more data rows as needed -->

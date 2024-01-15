@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sijili</string>
+
+    <!-- Activité principale -->
+    <string name="login_button">Connexion</string>
+    <string name="sign_up_button">Inscription</string>
+    <string name="desc">Votre solution d\'enregistrement commercial sans effort</string>
+
+    <!-- Activité de connexion -->
+    <string name="hello_login">
+        Bonjour ! Connectez-vous
+    </string>
+    <string name="email_login">
+        Entrez votre adresse e-mail
+    </string>
+    <string name="password_login">
+        Entrez votre mot de passe
+    </string>
+    <string name="forgot_pass">
+        Mot de passe oublié ?
+    </string>
+    <string name="login_btn">
+        Connexion
+    </string>
+    <string name="or_login_wi">
+        Ou connectez-vous avec
+    </string>
+    <string name="google_sign_in_button">Google</string>
+
+    <!-- strings.xml -->
+    <string name="don_t_have_">
+        Pas de compte ?
+    </string>
+    <string name="registre">
+        Inscrivez-vous
+    </string>
+
+    <!-- Activité d'inscription -->
+    <string name="hello_regis">
+        Bonjour ! Inscrivez-vous
+    </string>
+    <string name="email_regis">
+        Entrez votre adresse e-mail
+    </string>
+    <string name="firstname_regis">Votre prénom</string>
+    <string name="lastname_regis">Votre nom</string>
+    <string name="password_regis">Entrez votre mot de passe</string>
+    <string name="password_confirm_regis">Confirmez votre mot de passe</string>
+    <string name="registre_btn">Inscription</string>
+    <string name="or_regis_wi">Ou inscrivez-vous avec</string>
+    <string name="have_">Déjà un compte ?</string>
+    <string name="login_">Connectez-vous</string>
+
+    <!-- Activité de mot de passe oublié -->
+    <string name="forgot_pass_text">Mot de passe oublié ?</string>
+    <string name="forgot_desc">Pas de soucis ! Cela arrive. Veuillez saisir l\'adresse e-mail liée à votre compte.</string>
+    <string name="send_code_btn">Envoyer le code</string>
+    <string name="remebered_">Mot de passe mémorisé ?</string>
+
+    <!-- Activité de vérification OTP -->
+    <string name="otp_ver_text">Vérification OTP</string>
+    <string name="otp_desc">Entrez le code de vérification que nous venons d\'envoyer à votre adresse e-mail.</string>
+    <string name="verify_btn">Vérifier</string>
+
+    <!-- Page de création d'un nouveau mot de passe -->
+    <string name="create_new_pass_text">Créer un nouveau mot de passe</string>
+    <string name="create_new_pass_desc">Votre nouveau mot de passe doit être différent de ceux utilisés précédemment.</string>
+    <string name="new_pass_text">Nouveau mot de passe</string>
+    <string name="new_pass_confirm">Confirmer le mot de passe</string>
+    <string name="reseat_pass_btn">Réinitialiser le mot de passe</string>
+
+    <!-- Mot de passe changé avec succès -->
+    <string name="pass_changed">Mot de passe changé !</string>
+    <string name="pass_changed_desc">Votre mot de passe a été changé avec succès.</string>
+    <string name="back_login_text">Retour à la connexion</string>
+
+    <!-- ********************************************* -->
+    <!-- ****************************Client***************************** -->
+    <!-- ********************************************* -->
+    <!-- Activité principale du client -->
+    <string name="welcome_homeclient">Bienvenue chez vous</string>
+    <string name="submit_request_btn">Soumettre demande</string>
+    <string name="follow_request_btn">Suivre une demande</string>
+    <string name="ressource_btn">Ressources</string>
+
+    <!-- Sous-activité principale du client -->
+    <string name="fill_Infos">Veuillez remplir vos informations personnelles afin que nous puissions traiter votre soumission.</string>
+    <string name="sub_form_text">Formulaire de soumission</string>
+    <string name="company_sub">Nom de l\'entreprise</string>
+    <string name="address_sub">Adresse</string>
+    <string name="phone_sub">
+        Numéro de téléphone
+    </string>
+    <string name="activity_type_sub">Type d\'activité</string>
+    <string name="Date_sub">Date de naissance</string>
+    <string name="nationality_sub">Nationalité</string>
+    <string name="nat_id_sub">Identifiant national</string>
+    <string name="nat_id_sub_ex">Identifiant national (XXXXXXXXX)</string>
+    <string name="phone_sub_ex">Numéro de téléphone (0XXXXXXXXX)</string>
+    <string name="Date_sub_ex">Date de naissance (JJ-MM-AAAA)</string>
+    <string name="verify_txt">J\'accepte les</string>
+    <string name="term_condition_txt">Conditions d\'utilisation</string>
+
+    <!-- Sous-activité de suivi du client -->
+    <string name="flw_text">Résultat du traitement de la demande</string>
+    <string name="flw_desc_">Ici, vous pouvez voir le résultat de votre demande d\'enregistrement commercial.\n\nCliquez sur chaque demande pour voir plus de détails.</string>
+    <string name="terms_and_conditions_text_">Conditions d\'utilisation :\n\nBienvenue dans notre application d\'enregistrement d\'entreprise. En utilisant cette application, vous acceptez de respecter et d\'être lié par les conditions d\'utilisation suivantes. Veuillez lire attentivement ces conditions avant d\'utiliser l\'application.\n\nAcceptation des conditions :\nEn utilisant l\'application, vous acceptez d\'être lié par ces conditions, établissant une relation contractuelle entre vous et l\'application.\n\nResponsabilités de l\'utilisateur :\nLes utilisateurs sont responsables de fournir des informations précises et complètes dans la demande d\'enregistrement d\'entreprise. Toute information fausse peut entraîner le rejet de la demande.\n\nPolitique de confidentialité :\nL\'application respecte et protège la vie privée de ses utilisateurs. Les informations personnelles fournies lors du processus d\'inscription seront traitées conformément à notre politique de confidentialité.\n\nUtilisation de l\'application :\nL\'application est conçue pour aider les utilisateurs dans le processus de soumission et de suivi des demandes d\'enregistrement d\'entreprise. Toute utilisation abusive ou accès non autorisé à l\'application est strictement interdit.\n\nPréférences de notification :\nLes utilisateurs acceptent de recevoir des notifications concernant le statut de leurs demandes d\'enregistrement. Ces notifications seront envoyées à l\'adresse e-mail et au numéro de téléphone fournis.\n\nSupport et assistance :\nLes utilisateurs peuvent contacter le service client pour obtenir de l\'aide. L\'équipe de support fournira une assistance et des conseils liés à l\'application et au processus d\'enregistrement.\n\nPropriété intellectuelle :\nL\'application et son contenu sont protégés par les lois sur la propriété intellectuelle. Les utilisateurs acceptent de ne pas reproduire, distribuer, modifier ou créer des œuvres dérivées basées sur l\'application sans permission explicite.\n\nRésiliation :\nL\'application se réserve le droit de résilier ou de suspendre les comptes d\'utilisateurs pour toute violation de ces conditions d\'utilisation.\n\nMises à jour et modifications :\nL\'application peut mettre à jour ou modifier ces conditions d\'utilisation de temps à autre. Les utilisateurs seront informés de tout changement significatif.\n\nDroit applicable :\nCes conditions d\'utilisation sont régies par les lois de [insérer la juridiction applicable].\n\nEn utilisant l\'application, vous reconnaissez avoir lu, compris et accepté d\'être lié par ces conditions d\'utilisation.</string>
+
+    <!-- Sous-activité d'informations de suivi du client -->
+    <string name="follow_request_infos">Informations sur la demande</string>
+    <string name="pay_button">Payer ici</string>
+    <string name="delete_rq_">Supprimer</string>
+    <string name="print_rq_">Imprimer</string>
+
+    <!-- Sous-activité des ressources du client -->
+    <string name="ressources_text_">Introduction :\nCe guide donne un aperçu des principales fonctionnalités de l\'application d\'enregistrement d\'entreprise. Veuillez suivre ces étapes pour naviguer efficacement dans l\'application.\n\n1. Soumission de la demande :\n\nLes utilisateurs remplissent les informations requises pour l\'enregistrement d\'entreprise.\nL\'application guide les utilisateurs tout au long du processus de saisie des données, assurant l\'achèvement précis des champs obligatoires.\n2. Suivi en temps réel :\n\nAprès la soumission, les utilisateurs peuvent suivre le statut de leur demande en temps réel.\nUn tableau de bord clair et intuitif affiche les différentes étapes du processus, avec des notifications informant les utilisateurs de la progression de la demande.\n3. Assistance et ressources :\n\nAccédez aux fonctionnalités d\'assistance intégrées, notamment aux FAQ, aux conseils de remplissage de formulaires et aux ressources sur les exigences d\'enregistrement d\'entreprise.\n4. Support client :\n\nLes utilisateurs peuvent contacter directement le support client pour une assistance personnalisée via la messagerie in-app ou les appels.\nExemple d\'exécution de l\'application :\n\nTéléchargez et installez l\'application.\nConnectez-vous ou créez un compte.\nChoisissez parmi les options telles que "Soumettre une demande", "Suivre une demande", "Ressources" et "Support client".\nSuivez les invites pour soumettre une nouvelle demande d\'enregistrement d\'entreprise.\nRevoyez et confirmez la soumission.\nRecevez une confirmation et un numéro de suivi unique.\nSuivez la progression et recevez des notifications importantes.\nContactez le support client en cas de besoin.\nAprès approbation, recevez une notification indiquant que l\'enregistrement d\'entreprise est prêt à être récupéré.</string>
+    <string name="resources_text_">Introduction :\nCe guide fournit un aperçu des principales fonctionnalités de l\'application d\'enregistrement d\'entreprise. Veuillez suivre ces étapes pour naviguer efficacement à travers l\'application.\n\n1. Soumission de la demande :\n\nLes utilisateurs remplissent les informations requises pour l\'enregistrement de l\'entreprise.\nL\'application guide les utilisateurs tout au long du processus de saisie des données, garantissant l\'achèvement précis des champs obligatoires.\n2. Suivi en temps réel :\n\nAprès la soumission, les utilisateurs peuvent suivre en temps réel le statut de leur demande.\nUn tableau de bord clair et intuitif affiche les différentes étapes du processus, avec des notifications mettant à jour les utilisateurs sur la progression de la demande.\n3. Assistance et ressources :\n\nAccédez aux fonctionnalités d\'assistance intégrées, comprenant des FAQ, des conseils de remplissage de formulaire et des ressources sur les exigences d\'enregistrement d\'entreprise.\n4. Support client :\n\nLes utilisateurs peuvent contacter directement le support client pour une assistance personnalisée via la messagerie intégrée ou les appels.\nExemple d\'exécution de l\'application :\n\nTéléchargez et installez l\'application.\nConnectez-vous ou créez un compte.\nChoisissez parmi les options telles que "Soumettre une demande", "Suivre une demande", "Ressources" et "Support client".\nSuivez les invites pour soumettre une nouvelle demande d\'enregistrement d\'entreprise.\nRevoyez et confirmez la soumission.\nRecevez une confirmation et un numéro de suivi unique.\nSuivez la progression et recevez des notifications importantes.\nContactez le support client si nécessaire.\nÀ l\'approbation, recevez une notification indiquant que l\'enregistrement de l\'entreprise est prêt à être récupéré.</string>
+
+    <!-- ********************************************* -->
+    <!-- ****************************Serveur***************************** -->
+    <!-- ********************************************* -->
+    <!-- Activité principale du serveur -->
+    <string name="welcome_homeserver">Bienvenue chez vous</string>
+    <string name="manage_request_btn">Gérer les demandes</string>
+    <string name="manage_messages_btn">Messages</string>
+    <string name="request_list_txt">Liste des demandes</string>
+    <string name="submit_button">Soumettre</string>
+    <string name="messages_list_txt">Liste des messages</string>
+    <string name="fn_infos">Prénom</string>
+    <string name="ln_infos">Nom de famille</string>
+    <string name="email_ifos">E-mail</string>
+
+    <!-- ********************************************* -->
+    <!-- ****************************AUTRE***************************** -->
+    <!-- ********************************************* -->
+    <!-- Dialogue -->
+    <string name="empty_field_warning">Veuillez remplir tous les champs</string>
+    <string name="invalid_phone_number_warning">Numéro de téléphone invalide</string>
+    <string name="invalid_national_id_warning">Identifiant national invalide</string>
+    <string name="invalid_date_of_birth_warning">Date de naissance invalide, doit être JJ-MM-AAAA</string>
+    <string name="Payed">Payé</string>
+    <string name="status_sub">Statut</string>
+    <string name="pay_stat">Payé</string>
+    <string name="id_sub">ID actuel</string>
+    <string name="refuse_request_dialogue">Refusé avec succès</string>
+    <string name="accept_request_dialogue">Accepté avec succès</string>
+    <string name="status_completed">Completé</string>
+    <string name="status_refused">Refusé</string>
+    <string name="status_pending">En attente</string>
+    <string name="profileInfos">Profile Personnelle</string>
+    <string name="Edit_text">Édité</string>
+    <string name="save_text">Sauvgardé</string>
+    <string name="send_again">Envoyer code encore</string>
+</resources>

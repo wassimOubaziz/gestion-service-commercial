@@ -56,7 +56,6 @@ class ChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemViewType(position: Int): Int {
-        Log.d("SocketHandler2", "userId: ${differ.currentList[position].userId}, roomId: ${differ.currentList[position].roomId} , message:  ${differ.currentList[position].message}, isSelf:  ${differ.currentList[position].isSelf}")
         return if (differ.currentList[position].isSelf) ITEM_SELF else ITEM_OTHER
     }
 

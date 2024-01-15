@@ -60,7 +60,11 @@ router.put("/posts/:id", async (req, res) => {
       return res.status(404).json({ message: "Post not found" });
     }
 
-    const clientUser = await User.findById(updatedPost.userId);
+    const clientUser = await User.findByIdAndUpdate(
+      updatedPost.userId,
+      { notificationSeen: true },
+      { new: true }
+    );
 
     if (!clientUser) {
       return res.status(404).json({ message: "Client user not found" });
@@ -69,9 +73,8 @@ router.put("/posts/:id", async (req, res) => {
     // Save notification to Firebase Realtime Database
     const notificationRef = admin.database().ref("notifications");
     const newNotificationRef = notificationRef.push();
-
     const notificationData = {
-      userId: clientUser._id,
+      userId: clientUser._id.toString(),
       title: "Business Request Completed",
       body: "Your business request has been completed. You can download the PDF now.",
       timestamp: admin.database.ServerValue.TIMESTAMP,
@@ -90,10 +93,10 @@ router.put("/posts/:id", async (req, res) => {
         from: process.env.EMAIL_SECRET,
         to: clientUser.email,
         subject: "Your business request has been completed",
-        text: `Your business request has been completed. You can download the PDF now.`,
+        text: `Your business request ${updatedPost.companyName} has been completed. You can download the PDF now.`,
         html: `<div style="background-color: #f2f2f2; padding: 20px;">
         <h2>Your business request has been completed</h2>
-        <p>You can download the PDF now.</p>`,
+        <p>Your business request ${updatedPost.companyName} has been completed. You can download the PDF now.</p>`,
       });
     } catch (e) {
       throw new Error("Failed to send verification email");
@@ -113,12 +116,16 @@ router.put("/posts/:id", async (req, res) => {
       token: clientUser.fcmToken,
       notification: {
         title: "Business Request Completed",
-        body: "Your business request has been completed. You can download the PDF now.",
+        body: `Your business request ${updatedPost.companyName} has been completed. You can download the PDF now.`,
       },
     };
 
-    const response = await admin.messaging().send(message);
-    console.log("Notification sent successfully:", response);
+    try {
+      const response = await admin.messaging().send(message);
+      console.log("Notification sent successfully:", response);
+    } catch (error) {
+      console.log(error);
+    }
 
     res.status(200).json(updatedPost);
   } catch (error) {

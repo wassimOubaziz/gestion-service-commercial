@@ -5,24 +5,53 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select a Language"
-        android:textSize="18sp"
-        android:textColor="?android:attr/textColorPrimary"/>
-
-    <Button
+    <LinearLayout
         android:id="@+id/btnEnglish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="English"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-    <Button
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/uk_flag_roundedd" />
+
+        <TextView
+            style="@style/hello_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/urbanist"
+            android:text="English"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
         android:id="@+id/btnFrench"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Français"
-        android:layout_marginTop="8dp"/>
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView55"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/france_flag" />
+
+        <TextView
+            style="@style/hello_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/urbanist"
+            android:text="Français"
+
+            android:textSize="18sp" />
+    </LinearLayout>
+
 </LinearLayout>

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Sijili</string>
 
@@ -143,5 +144,12 @@
     <string name="id_sub">Current ID</string>
     <string name="refuse_request_dialogue">Refused successfully</string>
     <string name="accept_request_dialogue">Accepted succefully</string>
+    <string name="status_completed">Completed</string>
+    <string name="status_refused">Refused</string>
+    <string name="status_pending">Pending</string>
+    <string name="profileInfos">Personal Profile</string>
+    <string name="Edit_text">Edit</string>
+    <string name="save_text">Save</string>
+    <string name="send_again">Send code again</string>
 </resources>
 

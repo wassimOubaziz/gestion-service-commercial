@@ -13,6 +13,7 @@ const server = require("./routes/server");
 const rating = require("./routes/rating");
 const admin = require("./routes/admin");
 const forgotPassword = require("./routes/forgetPassword");
+const notification = require("./routes/notification");
 const logout = require("./routes/logout");
 var admine = require("firebase-admin");
 
@@ -60,6 +61,7 @@ app.use("/client", protect, permition("client"), client);
 app.use("/server", server);
 app.use("/admin", admin);
 app.use("/rating", protect, rating);
+app.use("/notifications", protect, notification);
 
 app.use("/logout", protect, logout);
 

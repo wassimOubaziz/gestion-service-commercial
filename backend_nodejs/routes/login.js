@@ -54,6 +54,7 @@ router.post("/", async (req, res) => {
       first_name: user.first_name,
       last_name: user.last_name,
       email: user.email,
+      userId: user._id,
     });
   } catch (e) {
     res.status(400).json({ message: e.message });

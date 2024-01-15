@@ -76,10 +76,10 @@ public class ClientFollowRequestActivity extends BaseActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     businessRequests.addAll(response.body());
                     adapter.notifyDataSetChanged();
-                    Toast.makeText(ClientFollowRequestActivity.this, "this is it", Toast.LENGTH_LONG);
+                    Toast.makeText(ClientFollowRequestActivity.this, "this is it", Toast.LENGTH_LONG).show();
                 } else {
                     // Handle unsuccessful response
-                    Toast.makeText(ClientFollowRequestActivity.this, "fAILED", Toast.LENGTH_LONG);
+                    Toast.makeText(ClientFollowRequestActivity.this, "fAILED", Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -88,17 +88,17 @@ public class ClientFollowRequestActivity extends BaseActivity {
             public void onFailure(Call<List<BusinessRequest>> call, Throwable t) {
                 dismissLoadingDialog();
                 // Handle failure
-                Toast.makeText(ClientFollowRequestActivity.this, "Error :" +t, Toast.LENGTH_LONG);
+                Toast.makeText(ClientFollowRequestActivity.this, "Network error", Toast.LENGTH_LONG).show();
 
             }
         });
     }
 
-    public void goToRequestInfos(View view) {
+    /*public void goToRequestInfos(View view) {
         Intent intent = new Intent(ClientFollowRequestActivity.this, ClientFollowRequestInfos.class);
         startActivity(intent);
     }
-
+*/
 
     //toGoToUserInfos
     public void onUserButtonClick(View view) {

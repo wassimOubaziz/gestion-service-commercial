@@ -34,7 +34,6 @@ class SocketHandler(private val authToken: String) {
             options.query = "token=$authToken"
             socket = IO.socket(SOCKET_URL, options)
             socket?.on(Socket.EVENT_CONNECT, Emitter.Listener {
-                Log.d("SocketHandler", "Socket connected")
                 _onSocketConnected.postValue(true)
 
 
@@ -58,7 +57,6 @@ class SocketHandler(private val authToken: String) {
             args?.let { d ->
                 if (d.isNotEmpty()) {
                     val data = d[0]
-                    Log.d("DATADEBUG", "$data")
                     if (data.toString().isNotEmpty()) {
                         val chat = Gson().fromJson(data.toString(), Chat::class.java)
                         _onNewChat.postValue(chat)
@@ -120,7 +118,6 @@ class SocketHandler(private val authToken: String) {
     fun disconnectSocket() {
         socket?.disconnect()
         socket?.off()
-        Log.d("SocketHandler", "Socket disconnected")
     }
 
     fun emitChat(chat: Chat) {

@@ -54,6 +54,7 @@ router.delete("/users/:id", async (req, res) => {
 router.put("/users/:id", async (req, res) => {
   try {
     const userId = req.params.id;
+    console.log("user", req.body);
     //get new user
     const body = req.body;
     const newUser = await User.findByIdAndUpdate(userId, body, { new: true });

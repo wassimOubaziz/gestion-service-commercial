@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.sijili.requests.EmailRequest;
 import com.example.sijili.requests.OTPRequest;
 
 import retrofit2.Call;
@@ -131,7 +132,7 @@ public class OTPVerification extends BaseActivity {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     dismissLoadingDialog();
-                    Log.d("Response otp","" + response);
+
                     if (response.isSuccessful()) {
                         // Handle successful verification
                         Toast.makeText(OTPVerification.this, "Verification successful", Toast.LENGTH_SHORT).show();
@@ -150,13 +151,12 @@ public class OTPVerification extends BaseActivity {
                 public void onFailure(Call<Void> call, Throwable t) {
                     dismissLoadingDialog();
                     // Handle network errors or other failures
-                    Toast.makeText(OTPVerification.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OTPVerification.this, "Network error", Toast.LENGTH_SHORT).show();
                 }
             });
             return;
 
         }
-        Log.d("TEST2", "test2");
         OTPRequest otpRequest = new OTPRequest(email, otp);
         showLoadingDialog();
         Call<Void> call = retrofitInterface.verifyOtp(otpRequest);
@@ -181,7 +181,7 @@ public class OTPVerification extends BaseActivity {
             public void onFailure(Call<Void> call, Throwable t) {
                 dismissLoadingDialog();
                 // Handle network errors or other failures
-                Toast.makeText(OTPVerification.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(OTPVerification.this, "Network error", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -189,4 +189,34 @@ public class OTPVerification extends BaseActivity {
     }
 
 
+    public void send_again_pass_btn(View view) {
+        emailForPass = i.getStringExtra("emailForPass");
+        Log.d("testEmail", emailForPass);
+        EmailRequest emailRequest = new EmailRequest(emailForPass);
+        showLoadingDialog();
+        Call<Void> call = retrofitInterface.forgotPassword(emailRequest);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                dismissLoadingDialog();
+                if (response.isSuccessful()) {
+                    // Handle successful initiation of forgot password process
+                    Toast.makeText(OTPVerification.this, "Validation code sent successfully", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    // Handle unsuccessful initiation of forgot password process
+                    Toast.makeText(OTPVerification.this, "Failed to initiate forgot password", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                dismissLoadingDialog();
+                // Handle network errors or other failures
+                Toast.makeText(OTPVerification.this, "Network error", Toast.LENGTH_SHORT).show();
+            }
+        });
+//        intent.putExtra("emailForPass", email.getText().toString());
+
+    }
 }

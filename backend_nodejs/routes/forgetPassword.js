@@ -5,6 +5,7 @@ const User = require("../model/User");
 
 // Route to initiate the forgot password process
 router.post("/", async (req, res) => {
+  console.log("dsklfjaslkfjsdlk", req.body);
   try {
     const { email } = req.body;
 

@@ -16,10 +16,12 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +41,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ClientHomeSubmitRequestActivity extends BaseActivity {
     EditText companyNameEditText, addressEditText, phoneNumberEditText, activityTypeEditText, dateOfBirthEditText, nationalityEditText, nationalityNumEditText;
+    Spinner nationalitySpinner;
+
     CheckBox verifiedCheckBox;
     private String BASE_URL = "http://192.168.43.59:4000";
     private Retrofit retrofit;
@@ -55,9 +59,16 @@ public class ClientHomeSubmitRequestActivity extends BaseActivity {
         phoneNumberEditText = findViewById(R.id.enteredPhoneNumber);
         activityTypeEditText = findViewById(R.id.enteredActivityType);
         dateOfBirthEditText = findViewById(R.id.editDate);
-        nationalityEditText = findViewById(R.id.enteredNationality);
+        nationalitySpinner = findViewById(R.id.spinnerNationality);
         nationalityNumEditText = findViewById(R.id.enteredNumId);
         verifiedCheckBox = findViewById(R.id.verifiedBtn);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.algerian_wilayas,
+                android.R.layout.simple_spinner_item
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        nationalitySpinner.setAdapter(adapter);
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -89,7 +100,7 @@ public class ClientHomeSubmitRequestActivity extends BaseActivity {
         String phoneNumber = phoneNumberEditText.getText().toString();
         String activityType = activityTypeEditText.getText().toString();
         String dateOfBirth = dateOfBirthEditText.getText().toString();
-        String nationality = nationalityEditText.getText().toString();
+        String nationality = nationalitySpinner.getSelectedItem().toString();
         String nationalityNum = nationalityNumEditText.getText().toString();
         boolean isDeclared = verifiedCheckBox.isChecked();
         if (companyName.isEmpty() || address.isEmpty() || phoneNumber.isEmpty() ||
@@ -122,20 +133,19 @@ public class ClientHomeSubmitRequestActivity extends BaseActivity {
         showLoadingDialog();
         Call<Void> call = retrofitInterface.executeNewRequest(authTokenHeader, businessRequest);
 
-        Log.d("SubmitRequestHandler", "Retrofit Request: " + call.request().toString());
+
 
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 dismissLoadingDialog();
-                Log.d("SubmitRequestHandler", "Response :" + response);
                 if (response.isSuccessful()) {
                     // Handle successful response
                     Toast.makeText(ClientHomeSubmitRequestActivity.this, "Request submitted successfully", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
                     // Handle unsuccessful response
-                    Toast.makeText(ClientHomeSubmitRequestActivity.this, "Failed to submit request", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ClientHomeSubmitRequestActivity.this, "Failed to submit request, might have wrong credentials", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -170,9 +180,6 @@ public class ClientHomeSubmitRequestActivity extends BaseActivity {
         editor.putInt("requestCount", currentCount + 1);
         editor.apply();
     }
-
-
-
-
-
 }
+
+

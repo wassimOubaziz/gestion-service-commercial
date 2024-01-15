@@ -45,8 +45,10 @@ public class ForgotPasswordActivity extends BaseActivity {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.d("testt", response+"");
+                Log.d("testt", response.body()+"");
+                Log.d("testt", response.errorBody()+"");
                 dismissLoadingDialog();
-                Log.d("Response ", "" + response);
                 if (response.isSuccessful()) {
                     // Handle successful initiation of forgot password process
                     Toast.makeText(ForgotPasswordActivity.this, "Validation code sent successfully", Toast.LENGTH_SHORT).show();
@@ -64,7 +66,7 @@ public class ForgotPasswordActivity extends BaseActivity {
             public void onFailure(Call<Void> call, Throwable t) {
                 dismissLoadingDialog();
                 // Handle network errors or other failures
-                Toast.makeText(ForgotPasswordActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ForgotPasswordActivity.this, "Network error" , Toast.LENGTH_SHORT).show();
             }
         });
 //        intent.putExtra("emailForPass", email.getText().toString());

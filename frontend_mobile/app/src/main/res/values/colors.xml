@@ -16,4 +16,10 @@
     <color name="bg_chat_item">#EAEAEA</color>
     <color name="bg_chat_item_self">#9CD1FF</color>
 
+    <!-- Dark theme colors. -->
+    <color name="dark_primary">#FFFFFF</color>
+    <color name="dark_secondary">#35C2C1</color>
+    <color name="darkm_red">#FF3D00</color>
+    <color name="primaryy">#1E232C</color>
+
 </resources>

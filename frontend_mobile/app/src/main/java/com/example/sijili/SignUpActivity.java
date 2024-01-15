@@ -68,10 +68,9 @@ public class SignUpActivity extends BaseActivity {
                     Intent intent = new Intent(SignUpActivity.this, OTPVerification.class);
                     intent.putExtra("email", email);
                     startActivity(intent);
-                    finish(); // You may navigate to another activity upon successful sign-up
+                    finish();
                 } else {
-                    // Handle unsuccessful sign-up response
-                    Toast.makeText(SignUpActivity.this, "Sign-up failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Sign-up failed, might have some wrong information or email already used", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -79,11 +78,10 @@ public class SignUpActivity extends BaseActivity {
             public void onFailure(Call<Void> call, Throwable t) {
                 dismissLoadingDialog();
                 // Handle network errors or other failures
-                Toast.makeText(SignUpActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignUpActivity.this, "Network error", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
     public void goToLogin(View view) {
         Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
         startActivity(intent);

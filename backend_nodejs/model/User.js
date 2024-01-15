@@ -56,13 +56,7 @@ const userSchima = new Schema({
   },
   deviceToken: { type: String },
   fcmToken: { type: String, default: undefined },
-  socketId: { type: String },
-  notifications: [
-    {
-      message: String,
-      timestamp: { type: Date, default: Date.now },
-    },
-  ],
+  notificationSeen: { type: Boolean, default: false },
 });
 
 //this will work when i update the password or when i create new user

@@ -338,7 +338,7 @@
                     android:background="@drawable/secondary_button"
                     android:onClick="printRequest"
                     android:text="@string/print_rq_"
-                    android:textColor="@color/primary"
+                    android:textColor="@color/primaryy"
                     android:textSize="16sp" />
 
                 <Button
@@ -350,6 +350,7 @@
                     android:background="@drawable/delete_button"
                     android:onClick="deleteRequest"
                     android:text="@string/delete_rq_"
+
                     android:textSize="16sp" />
             </LinearLayout>
 
