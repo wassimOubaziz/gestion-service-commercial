@@ -7,7 +7,6 @@ const User = require("../model/User"); // Adjust the path based on your project 
 router.post("/", async (req, res) => {
   try {
     const body = req.body;
-    console.log(req.body);
     body.role = ["client"];
     // Generate a random 4-digit verification code
     const verificationCode = Math.floor(1000 + Math.random() * 9000);

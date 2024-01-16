@@ -1,0 +1,9 @@
+/* Sidebar.css */
+
+.sidebar {
+  width: 250px;
+  height: calc(100vh - 60.4px);
+  background-color: #17222e;
+  padding: 20px;
+  box-sizing: border-box;
+}

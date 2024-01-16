@@ -39,6 +39,8 @@ android {
     }
 }
 
+
+
 dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -67,5 +69,7 @@ dependencies {
     implementation ("com.google.firebase:firebase-messaging:23.0.0")
 
     implementation("com.google.firebase:firebase-database")
+
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
 }

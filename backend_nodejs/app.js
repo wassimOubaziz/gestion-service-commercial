@@ -15,6 +15,8 @@ const admin = require("./routes/admin");
 const forgotPassword = require("./routes/forgetPassword");
 const notification = require("./routes/notification");
 const logout = require("./routes/logout");
+const switchacount = require("./routes/switchacount");
+const static = require("./routes/statistic");
 var admine = require("firebase-admin");
 
 var serviceAccount = require("./register-commerce-firebase-adminsdk-gdqfy-a26084119b.json");
@@ -62,6 +64,8 @@ app.use("/server", server);
 app.use("/admin", admin);
 app.use("/rating", protect, rating);
 app.use("/notifications", protect, notification);
+app.use("/switch-role", protect, switchacount);
+app.use("/static", static);
 
 app.use("/logout", protect, logout);
 

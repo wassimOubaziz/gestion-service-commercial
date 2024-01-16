@@ -23,11 +23,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp">
+            android:layout_marginRight="24dp"
+            app:layoutDescription="@xml/activity_client_home_xml_constraintlayout_scene">
 
 
             <include
@@ -202,10 +204,9 @@
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ressource_btn"
-                app:layout_constraintVertical_bias="0.0"
-                />
+                app:layout_constraintVertical_bias="0.0" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.motion.widget.MotionLayout>
     </ScrollView>
 
 

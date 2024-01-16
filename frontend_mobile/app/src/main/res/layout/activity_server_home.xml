@@ -22,11 +22,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/constraintLayout3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp">
+            android:layout_marginRight="24dp"
+            app:layoutDescription="@xml/activity_server_home_xml_constraintlayout3_scene">
 
             <include
                 android:id="@+id/action_btns"
@@ -48,6 +50,23 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/action_btns" />
 
+            <LinearLayout
+                android:id="@+id/chartLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/welcomeClientText">
+
+                <!-- Existing views and buttons -->
+
+                <!-- BarChart view -->
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/barChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:layout_marginTop="16dp" />
+
+            </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/submit_request_btn"
@@ -59,7 +78,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/welcomeClientText">
+                app:layout_constraintTop_toBottomOf="@id/chartLayout">
 
                 <!-- Text on the left -->
                 <TextView
@@ -94,6 +113,7 @@
 
                 <!-- Button overlay to capture clicks -->
             </RelativeLayout>
+
 
             <RelativeLayout
                 android:id="@+id/follow_request_btn"
@@ -139,7 +159,7 @@
 
                 <!-- Button overlay to capture clicks -->
             </RelativeLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.motion.widget.MotionLayout>
     </ScrollView>
 
 

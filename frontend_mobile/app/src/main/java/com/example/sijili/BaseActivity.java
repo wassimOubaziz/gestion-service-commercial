@@ -121,7 +121,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                         // Do something with the notificationSeenStatus
                         if (notificationSeenStatus){
                             notificationButton = findViewById(R.id.notif_btn);
-                            notificationButton.setImageResource(R.drawable.notification_bell_black);
+                            notificationButton.setImageResource(R.drawable.notification_black);
                         }else{
                             notificationButton = findViewById(R.id.notif_btn);
                             notificationButton.setImageResource(R.drawable.notification_black);
@@ -390,29 +390,32 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void switchAccount() {
-        Class<?> currentActivityClass = this.getClass();
-        Class<?> targetActivityClass;
-
         SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
-        String role = preferences.getString("role", "");
+        SharedPreferences.Editor editor = preferences.edit();
 
-        // Determine the target activity class based on the current role
-        if ("client".equals(role)) {
-            targetActivityClass = ServerHomeActivity.class;
-        } else if ("server".equals(role)) {
-            targetActivityClass = ClientHomeActivity.class;
-        } else {
-            // Handle other roles or cases
-            return;
-        }
+        // Ensure retrofit is not null before using it
 
-        // Check if the user is already in the target activity
-        if (!currentActivityClass.equals(targetActivityClass)) {
-            Intent intent = new Intent(BaseActivity.this, targetActivityClass);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            finish();
-        }
+
+        //delete device identifier
+        retrofitInterface = retrofit.create(RetrofitInterface.class);
+
+        // Ensure retrofitInterface is not null before using it
+
+
+        String authToken = "Bearer " + preferences.getString("token", "");
+
+        retrofitInterface.switchRole(authToken).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                logoutHandler();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("LOGOUT", "Error logging out: " + t.getMessage());
+                showToast("Network error");
+            }
+        });
     }
 
     private void showRatingDialog() {

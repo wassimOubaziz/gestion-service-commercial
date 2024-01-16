@@ -65,10 +65,10 @@ public class ServerManageRequestsActivity extends BaseActivity {
                 dismissLoadingDialog();
                 if (response.isSuccessful() && response.body() != null) {
                     displayCommerceRequests(response.body());
-                    Toast.makeText(ServerManageRequestsActivity.this, "fetch 2 success", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ServerManageRequestsActivity.this, "Success", Toast.LENGTH_LONG).show();
                 } else {
                     // Handle unsuccessful response
-                    Toast.makeText(ServerManageRequestsActivity.this, "fetch 3 failed", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ServerManageRequestsActivity.this, "No avaliable requests", Toast.LENGTH_LONG).show();
                 }
             }
 

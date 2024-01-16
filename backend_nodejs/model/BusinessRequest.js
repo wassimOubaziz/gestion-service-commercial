@@ -50,6 +50,10 @@ const businessRequestSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  createdAt: {
+    type: Date,
+    default: new Date(),
+  },
 });
 
 businessRequestSchema.index(

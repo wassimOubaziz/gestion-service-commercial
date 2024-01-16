@@ -59,6 +59,7 @@ class SocketHandler(private val authToken: String) {
                     val data = d[0]
                     if (data.toString().isNotEmpty()) {
                         val chat = Gson().fromJson(data.toString(), Chat::class.java)
+                       // chat.isSelf = chat.userId == ""
                         _onNewChat.postValue(chat)
                     }
                 }

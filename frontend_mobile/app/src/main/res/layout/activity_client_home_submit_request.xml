@@ -157,7 +157,7 @@
                     android:background="@drawable/edit_text_form"
                     android:ems="10"
                     android:hint="@string/Date_sub_ex"
-                    android:inputType="date"
+                    android:inputType="phone"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
                     android:textSize="16sp" />

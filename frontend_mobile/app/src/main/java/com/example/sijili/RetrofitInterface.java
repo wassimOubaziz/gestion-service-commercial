@@ -100,4 +100,11 @@ public interface RetrofitInterface {
 
 
 
+    @PUT("/switch-role")
+    Call<Void> switchRole(@Header("Authorization")String authToken);
+
+    @GET("/static/service")
+    Call<List<BusinessRequestCount>> getBusinessRequestsCount();
+
+
 }

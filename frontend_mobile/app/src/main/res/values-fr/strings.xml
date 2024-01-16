@@ -98,7 +98,7 @@
     <string name="nat_id_sub">Identifiant national</string>
     <string name="nat_id_sub_ex">Identifiant national (XXXXXXXXX)</string>
     <string name="phone_sub_ex">Numéro de téléphone (0XXXXXXXXX)</string>
-    <string name="Date_sub_ex">Date de naissance (JJ-MM-AAAA)</string>
+    <string name="Date_sub_ex">Naissance (JJ-MM-AAAA)</string>
     <string name="verify_txt">J\'accepte les</string>
     <string name="term_condition_txt">Conditions d\'utilisation</string>
 
