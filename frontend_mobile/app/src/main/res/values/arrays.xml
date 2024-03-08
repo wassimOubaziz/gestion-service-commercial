@@ -49,4 +49,29 @@
         <item>Ghardaïa</item>
         <item>Relizane</item>
     </string-array>
+    <string-array name="faq_titles">
+        <item>What is the purpose of this Business Registry application?</item>
+        <item>What are the key features of the application?</item>
+        <item>How do I submit a business registry request with the application?</item>
+        <item>How can I track the status of my request in real-time?</item>
+        <item>What information is required in the request form?</item>
+        <item>How does customer support work in the application?</item>
+        <item>How will I know when my request is approved?</item>
+        <item>How can I access the integrated support resources?</item>
+        <item>Is the application available on all mobile platforms?</item>
+        <item>How do I retrieve my business registry once the request is approved?</item>
+    </string-array>
+
+    <string-array name="faq_descriptions">
+        <item>The main purpose of this application is to provide users with a user-friendly and intuitive interface to submit and track their business registry requests directly from their mobile phones.</item>
+        <item>Key features of the application include the ability to submit a business registry request, real-time tracking of request progress, access to integrated support resources, and facilitating direct customer support from within the application.</item>
+        <item>To submit a request, users need to download and install the application, log in to their account, select the "Submit a request" option from the home screen, and fill out the request form following the guidance provided by the application.</item>
+        <item>Once the request is submitted, users can use the "Track a request" option to access a dashboard displaying different stages of the process. Notifications will also be sent to inform users of important updates.</item>
+        <item>The request form includes sections such as business information (name, address, etc.), personal information of the applicant (name, date of birth, etc.), a declaration of accuracy, and a "Submit request" button.</item>
+        <item>The application offers a "Customer Support" option allowing users to directly contact support for questions or issues. They can send messages or call customer support directly from within the application.</item>
+        <item>Users will receive notifications on their phones throughout the process. Once the request is approved, a specific notification will be sent, indicating that the business registry is ready to be retrieved.</item>
+        <item>Users can access support resources, such as frequently asked questions and guidance, by selecting the Resources option from the application\'s home screen.</item>
+        <item>The application is available in mobile versions and can be downloaded on major platforms, such as Android and iOS.</item>
+        <item>Once the request is approved, the user will receive a notification stating that the business registry is ready. They can then retrieve it following the instructions provided within the application.</item>
+    </string-array>
 </resources>

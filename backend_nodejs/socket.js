@@ -80,7 +80,7 @@ async function initializeSocket(server) {
       if (existingMessages.length === 0) {
         // Create an empty message for the room
         const emptyMessage = new Message({
-          userId: "6582c8e3b652a65d70655d20",
+          userId: "65a10b5099d2700d7199c6e5",
           roomId: roomId,
           isSelf: false,
           message: "Welcome to the Support Hub! 🚀",

@@ -121,7 +121,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                         // Do something with the notificationSeenStatus
                         if (notificationSeenStatus){
                             notificationButton = findViewById(R.id.notif_btn);
-                            notificationButton.setImageResource(R.drawable.notification_black);
+                            notificationButton.setImageResource(R.drawable.notification_bell_black);
                         }else{
                             notificationButton = findViewById(R.id.notif_btn);
                             notificationButton.setImageResource(R.drawable.notification_black);

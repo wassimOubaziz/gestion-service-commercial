@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.example.sijili.requests.User;
 
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -94,10 +96,23 @@ public class ProfileInfos extends BaseActivity {
                     // Handle success
                     recreate();
                     User savedUser = response.body();
+
                     // Handle the saved user object as needed
                 } else {
                     // Handle error
-                    // You can get error details from response.errorBody()
+                    if (response.errorBody() != null) {
+                        try {
+                            // You can extract error details from the error body
+                            String errorResponse = response.errorBody().string();
+                            Log.e("TAGss", "Error response: " + errorResponse);
+                            // Handle the error message as needed
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        // Handle other types of errors
+                        Log.e("TAGss", "Error response: " + response.message());
+                    }
                 }
             }
 
@@ -109,5 +124,6 @@ public class ProfileInfos extends BaseActivity {
                 t.printStackTrace();
             }
         });
+
     }
 }

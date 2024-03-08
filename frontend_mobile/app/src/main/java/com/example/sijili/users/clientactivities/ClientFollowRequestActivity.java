@@ -76,10 +76,9 @@ public class ClientFollowRequestActivity extends BaseActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     businessRequests.addAll(response.body());
                     adapter.notifyDataSetChanged();
-                    Toast.makeText(ClientFollowRequestActivity.this, "this is it", Toast.LENGTH_LONG).show();
                 } else {
                     // Handle unsuccessful response
-                    Toast.makeText(ClientFollowRequestActivity.this, "fAILED", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ClientFollowRequestActivity.this, "No Data", Toast.LENGTH_LONG).show();
 
                 }
             }

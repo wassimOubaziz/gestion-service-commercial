@@ -80,11 +80,10 @@ public class ServerMessagesActivity extends BaseActivity {
             public void onResponse(Call<List<MessageRequest>> call, Response<List<MessageRequest>> response) {
                 dismissLoadingDialog();
                 if (response.isSuccessful() && response.body() != null) {
-                    Toast.makeText(ServerMessagesActivity.this, "fetch 2 success" + response.body(), Toast.LENGTH_LONG).show();
                     displayCommerceMessages(response.body());
                 } else {
                     // Handle error
-                    Toast.makeText(ServerMessagesActivity.this, "fetch 3 failed", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ServerMessagesActivity.this, "No data", Toast.LENGTH_LONG).show();
                 }
             }
 

@@ -97,7 +97,7 @@
     <string name="nat_id_sub">National ID</string>
     <string name="nat_id_sub_ex">National ID (XXXXXXXXX)</string>
     <string name="phone_sub_ex">Phone number (0XXXXXXXXX)</string>
-    <string name="Date_sub_ex">Birthday (DD-MM-YYYY)</string>
+    <string name="Date_sub_ex">Birthday (MM-DD-YYYY)</string>
     <string name="verify_txt">I will agree to</string>
     <string name="term_condition_txt">Terms and Conditions</string>
     <!-- Client home follow activity-->
@@ -151,5 +151,7 @@
     <string name="Edit_text">Edit</string>
     <string name="save_text">Save</string>
     <string name="send_again">Send code again</string>
+    <string name="title">hi</string>
+    <string name="dis">hi there</string>
 </resources>
 

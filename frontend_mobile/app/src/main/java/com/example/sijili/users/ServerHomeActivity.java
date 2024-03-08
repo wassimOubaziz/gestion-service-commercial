@@ -71,10 +71,12 @@ public class ServerHomeActivity extends BaseActivity {
     }
 
     private void fetchBusinessRequestsCount() {
+        showLoadingDialog();
         Call<List<BusinessRequestCount>> call = retrofitInterface.getBusinessRequestsCount();
         call.enqueue(new Callback<List<BusinessRequestCount>>() {
             @Override
             public void onResponse(Call<List<BusinessRequestCount>> call, Response<List<BusinessRequestCount>> response) {
+                dismissLoadingDialog();
                 if (response.isSuccessful()) {
                     List<BusinessRequestCount> businessRequestCounts = response.body();
                     // Process the businessRequestCounts and update the BarChart
@@ -87,6 +89,7 @@ public class ServerHomeActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<List<BusinessRequestCount>> call, Throwable t) {
+                dismissLoadingDialog();
                 // Handle failure
                 Toast.makeText(ServerHomeActivity.this, "Network error", Toast.LENGTH_SHORT).show();
             }

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="algerian_wilayas">
+        <item>Adrar</item>
+        <item>Chlef</item>
+        <item>Laghouat</item>
+        <item>Oum El Bouaghi</item>
+        <item>Batna</item>
+        <item>Béjaïa</item>
+        <item>Biskra</item>
+        <item>Béchar</item>
+        <item>Blida</item>
+        <item>Bouira</item>
+        <item>Tamanrasset</item>
+        <item>Tébessa</item>
+        <item>Tlemcen</item>
+        <item>Tiaret</item>
+        <item>Tizi Ouzou</item>
+        <item>Alger</item>
+        <item>Djelfa</item>
+        <item>Jijel</item>
+        <item>Sétif</item>
+        <item>Saïda</item>
+        <item>Skikda</item>
+        <item>Sidi Bel Abbès</item>
+        <item>Annaba</item>
+        <item>Guelma</item>
+        <item>Constantine</item>
+        <item>Médéa</item>
+        <item>Mostaganem</item>
+        <item>Msila</item>
+        <item>Mascara</item>
+        <item>Ouargla</item>
+        <item>Oran</item>
+        <item>El Bayadh</item>
+        <item>Illizi</item>
+        <item>Bordj Bou Arreridj</item>
+        <item>Boumerdès</item>
+        <item>El Tarf</item>
+        <item>Tindouf</item>
+        <item>Tissemsilt</item>
+        <item>El Oued</item>
+        <item>Khenchela</item>
+        <item>Souk Ahras</item>
+        <item>Tipaza</item>
+        <item>Mila</item>
+        <item>Aïn Defla</item>
+        <item>Naâma</item>
+        <item>Aïn Témouchent</item>
+        <item>Ghardaïa</item>
+        <item>Relizane</item>
+    </string-array>
+    <string-array name="faq_titles">
+        <item>Quel est l\'objectif de cette application du Registre des Entreprises ?</item>
+        <item>Quelles sont les fonctionnalités clés de l\'application ?</item>
+        <item>Comment puis-je soumettre une demande de registre d\'entreprise avec l\'application ?</item>
+        <item>Comment puis-je suivre le statut de ma demande en temps réel ?</item>
+        <item>Quelles informations sont nécessaires dans le formulaire de demande ?</item>
+        <item>Comment fonctionne le support client dans l\'application ?</item>
+        <item>Comment saurai-je quand ma demande est approuvée ?</item>
+        <item>Comment puis-je accéder aux ressources de support intégrées ?</item>
+        <item>L\'application est-elle disponible sur toutes les plates-formes mobiles ?</item>
+        <item>Comment puis-je récupérer mon registre d\'entreprise une fois la demande approuvée ?</item>
+    </string-array>
+
+    <string-array name="faq_descriptions">
+        <item>L\'objectif principal de cette application est de fournir aux utilisateurs une interface conviviale et intuitive pour soumettre et suivre leurs demandes de registre d\'entreprise directement depuis leurs téléphones mobiles.</item>
+        <item>Les fonctionnalités clés de l\'application comprennent la possibilité de soumettre une demande de registre d\'entreprise, le suivi en temps réel de la progression de la demande, l\'accès à des ressources de support intégrées et la facilitation du support client directement depuis l\'application.</item>
+        <item>Pour soumettre une demande, les utilisateurs doivent télécharger et installer l\'application, se connecter à leur compte, sélectionner l\'option "Soumettre une demande" depuis l\'écran d\'accueil et remplir le formulaire de demande en suivant les instructions fournies par l\'application.</item>
+        <item>Une fois la demande soumise, les utilisateurs peuvent utiliser l\'option "Suivre une demande" pour accéder à un tableau de bord affichant différentes étapes du processus. Des notifications seront également envoyées pour informer les utilisateurs des mises à jour importantes.</item>
+        <item>Le formulaire de demande comprend des sections telles que les informations sur l\'entreprise (nom, adresse, etc.), les informations personnelles du demandeur (nom, date de naissance, etc.), une déclaration d\'exactitude et un bouton "Soumettre la demande".</item>
+        <item>L\'application offre une option "Support client" permettant aux utilisateurs de contacter directement le support pour des questions ou des problèmes. Ils peuvent envoyer des messages ou appeler le support client directement depuis l\'application.</item>
+        <item>Les utilisateurs recevront des notifications sur leurs téléphones tout au long du processus. Une fois la demande approuvée, une notification spécifique sera envoyée, indiquant que le registre d\'entreprise est prêt à être récupéré.</item>
+        <item>Les utilisateurs peuvent accéder aux ressources de support, telles que les questions fréquemment posées et les conseils, en sélectionnant l\'option Ressources depuis l\'écran d\'accueil de l\'application.</item>
+        <item>L\'application est disponible en versions mobiles et peut être téléchargée sur les principales plates-formes, telles qu\'Android et iOS.</item>
+        <item>Une fois la demande approuvée, l\'utilisateur recevra une notification indiquant que le registre d\'entreprise est prêt. Ils peuvent alors le récupérer en suivant les instructions fournies dans l\'application.</item>
+    </string-array>
+</resources>
